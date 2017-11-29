@@ -2,15 +2,10 @@ public class Message {
 
     Players player;
     int actionType;
-    Players number;
-    //Message message;
 
-    public Message (Players player, int actionType) {
-        this.player = player;
+    public Message (Players playerNumber, int actionType) {
+        this.player = playerNumber;
         this.actionType = actionType;
-        this.number = number;
-        //this.message = message;
-
     }
 
     public Players getPlayer() {
