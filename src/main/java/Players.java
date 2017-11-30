@@ -23,5 +23,4 @@ public class Players {
         return points;
 
     }
-
 }

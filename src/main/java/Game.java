@@ -6,7 +6,7 @@ public class Game {
     public Game(Players firstPlayerName, Players secondPlayerName) {
         this.playerOne = firstPlayerName;
         this.playerTwo = secondPlayerName;
-        
+
     }
 
     public void buttonWasPressedWithValue(Message mail) {
@@ -28,5 +28,3 @@ public class Game {
         }
     }
 }
-
-

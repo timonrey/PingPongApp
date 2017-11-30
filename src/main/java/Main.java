@@ -1,6 +1,5 @@
 public class Main {
 
-
     public static void main(String[] args) {
 
 
@@ -12,7 +11,7 @@ public class Main {
         Message nicolaReset = new Message(nicola, 3);
         Message philippReset = new Message(philipp,3);
 
-       // match.playerTwo = new Players()
+        // match.playerTwo = new Players()
 
         match.buttonWasPressedWithValue(nicolaScores);
         match.buttonWasPressedWithValue(philippScores);
@@ -72,8 +71,5 @@ public class Main {
         System.out.println(finalCountPhilipp);
 
 
-        }
     }
-
-
-
+}
