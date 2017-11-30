@@ -3,28 +3,35 @@ public class Game {
     Players playerOne;
     Players playerTwo;
 
-    public Game(Players firstPlayerName, Players secondPlayerName) {
-        this.playerOne = firstPlayerName;
-        this.playerTwo = secondPlayerName;
-
+    public Game(Players firstPlayer, Players secondPlayer) {
+        this.playerOne = firstPlayer;
+        this.playerTwo = secondPlayer;
     }
 
-    public void buttonWasPressedWithValue(Message mail) {
-        int scoreOne = playerOne.getter();
-        int scoreTwo = playerTwo.getter();
-        Players valuePlayer = mail.getPlayer();
-        int valueActionType = mail.getActionType();
+    public boolean hasSomeoneOfThePlayersElevenPointsYet() {
+        if (this.playerOne.getScore() == 11 || this.playerTwo.getScore() == 11) {
+            return true;
 
-        if (valueActionType == 1 && scoreOne < 11 && scoreTwo < 11) {
-            valuePlayer.add();
+        } else {
+            return false;
+        }
+    }
 
-        } else if (valueActionType == 2) {
-            valuePlayer.sub();
 
-        } else if (valueActionType == 3) {
-            valuePlayer.reset();
+    // We already selected the player...he knows already which player had pushed the button
+    public void updateScoreOfPlayer(Players player, int actionType) {
+
+        if (actionType == 1 && !!hasSomeoneOfThePlayersElevenPointsYet()) {
+            player.add();
+
+        } else if (actionType == 2) {
+            player.sub();
+
+        } else if (actionType == 3) {
+            player.reset();
 
 
         }
+
     }
 }

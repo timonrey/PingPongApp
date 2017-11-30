@@ -1,15 +1,15 @@
 public class Message {
 
-    Players player;
+    String buttonId;
     int actionType;
 
-    public Message (Players playerNumber, int actionType) {
-        this.player = playerNumber;
+    public Message (String buttonId, int actionType) {
+        this.buttonId = buttonId;
         this.actionType = actionType;
     }
 
-    public Players getPlayer() {
-        return player;
+    public String getButtonId() {
+        return buttonId;
     }
 
     public int getActionType() {

@@ -31,8 +31,11 @@ public class PingPong {
 
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode payload = objectMapper.readTree(bodyStream);
+            String buttonId = payload.get("button").asText();
+            int actionType = payload.get("actionType").asInt();
 
-            this.monitor.buttonPress(payload);
+            Message message = new Message(buttonId, actionType);
+            this.monitor.buttonPress(message);
 
             String response = "This is the response";
             t.sendResponseHeaders(200, response.length());
@@ -46,8 +49,8 @@ public class PingPong {
 /**
  *
  * {
- *     button: '1',
- *     actionType: 'click'
+ *     buttonId: '1',
+ *     actionType: 1
  * }
  *
  *

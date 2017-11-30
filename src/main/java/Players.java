@@ -19,7 +19,7 @@ public class Players {
     }
 
 
-    public int getter () {
+    public int getScore() {
         return points;
 
     }

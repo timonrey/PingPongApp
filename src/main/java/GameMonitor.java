@@ -1,32 +1,23 @@
-import com.fasterxml.jackson.databind.JsonNode;
-import com.sun.prism.shader.Solid_ImagePattern_Loader;
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-
 public class GameMonitor {
 
-    Players nicola;
-    Players philipp;
+    Players firstPlayer;
+    Players secondPlayer;
     Game spiel;
 
     public GameMonitor () {
-        this.nicola = new Players();
-        this.philipp = new Players();
-        this.spiel = new Game(nicola, philipp);
+        this.firstPlayer = new Players();
+        this.secondPlayer = new Players();
+        this.spiel = new Game(firstPlayer, secondPlayer);
     }
 
-    public void buttonPress(JsonNode clickPayload) {
-        String button = clickPayload.get("button").asText();
-        int actionType = clickPayload.get("actionType").asInt();
-        System.out.println(button);
-        if (button.equals("1")) {
-            Message buttonClick = new Message(nicola, actionType);
-            //System.out.println(button);
-            spiel.buttonWasPressedWithValue(buttonClick);
-        } else if (button.equals("2")) {
-            Message buttonclick = new Message(philipp, actionType);
-            spiel.buttonWasPressedWithValue(buttonclick);
+    public void buttonPress(Message message) {
+
+        if (message.getButtonId().equals("1")) {
+            spiel.updateScoreOfPlayer(firstPlayer, message.getActionType());
+        } else if (message.getButtonId().equals("2")) {
+            spiel.updateScoreOfPlayer(secondPlayer, message.getActionType());
         }
 
-        System.out.println(String.format("%s vs %s", nicola.getter(), philipp.getter()));
+        System.out.println(String.format("%s vs %s", firstPlayer.getScore(), secondPlayer.getScore()));
     }
 }
