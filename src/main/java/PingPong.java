@@ -13,17 +13,17 @@ public class PingPong {
 
 
     public static void main(String[] args) throws Exception {
+        GameMonitor monitor = new GameMonitor();
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-        server.createContext("/click", new MyHandler());
+        server.createContext("/click", new MyHandler(monitor));
         server.setExecutor(null); // creates a default executor
         server.start();
     }
 
     static class MyHandler implements HttpHandler {
         private GameMonitor monitor;
-        public MyHandler () {
-
-            this.monitor = new GameMonitor();
+        public MyHandler (GameMonitor irgendeinname) {
+            this.monitor = irgendeinname;
         }
         @Override
         public void handle(HttpExchange t) throws IOException {
