@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pingpong.iml" filepath="$PROJECT_DIR$/.idea/modules/pingpong.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pingpong_main.iml" filepath="$PROJECT_DIR$/.idea/modules/pingpong_main.iml" group="pingpong" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pingpong_test.iml" filepath="$PROJECT_DIR$/.idea/modules/pingpong_test.iml" group="pingpong" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PingPongApp.iml" filepath="$PROJECT_DIR$/.idea/modules/PingPongApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PingPongApp_main.iml" filepath="$PROJECT_DIR$/.idea/modules/PingPongApp_main.iml" group="PingPongApp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PingPongApp_test.iml" filepath="$PROJECT_DIR$/.idea/modules/PingPongApp_test.iml" group="PingPongApp" />
     </modules>
   </component>
 </project>
