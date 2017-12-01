@@ -1,10 +1,23 @@
-import com.fasterxml.jackson.databind.JsonNode;
-
 public class GameMonitor {
-    public void buttonPress(JsonNode clickPayload) {
-        String button = clickPayload.get("button").asText();
-        String actionType = clickPayload.get("actionType").asText();
 
-        System.out.println(String.format("Button %s sent the action %s", button, actionType));
+    Players firstPlayer;
+    Players secondPlayer;
+    Game spiel;
+
+    public GameMonitor () {
+        this.firstPlayer = new Players();
+        this.secondPlayer = new Players();
+        this.spiel = new Game(firstPlayer, secondPlayer);
+    }
+
+    public void buttonPress(Message message) {
+
+        if (message.getButtonId().equals("1")) {
+            spiel.updateScoreOfPlayer(firstPlayer, message.getActionType());
+        } else if (message.getButtonId().equals("2")) {
+            spiel.updateScoreOfPlayer(secondPlayer, message.getActionType());
+        }
+
+        System.out.println(String.format("%s vs %s", firstPlayer.getScore(), secondPlayer.getScore()));
     }
 }

@@ -13,17 +13,17 @@ public class PingPong {
 
 
     public static void main(String[] args) throws Exception {
+        GameMonitor monitor = new GameMonitor();
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-        server.createContext("/click", new MyHandler());
+        server.createContext("/click", new MyHandler(monitor));
         server.setExecutor(null); // creates a default executor
         server.start();
     }
 
     static class MyHandler implements HttpHandler {
         private GameMonitor monitor;
-        public MyHandler () {
-
-            this.monitor = new GameMonitor();
+        public MyHandler (GameMonitor irgendeinname) {
+            this.monitor = irgendeinname;
         }
         @Override
         public void handle(HttpExchange t) throws IOException {
@@ -31,8 +31,11 @@ public class PingPong {
 
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode payload = objectMapper.readTree(bodyStream);
+            String buttonId = payload.get("button").asText();
+            int actionType = payload.get("actionType").asInt();
 
-            this.monitor.buttonPress(payload);
+            Message message = new Message(buttonId, actionType);
+            this.monitor.buttonPress(message);
 
             String response = "This is the response";
             t.sendResponseHeaders(200, response.length());
@@ -46,8 +49,8 @@ public class PingPong {
 /**
  *
  * {
- *     button: '1',
- *     actionType: 'click'
+ *     buttonId: '1',
+ *     actionType: 1
  * }
  *
  *
