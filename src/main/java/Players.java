@@ -1,6 +1,7 @@
 public class Players {
 
     int points = 0;
+    int matchPoints;
 
     public Players() {
 
@@ -18,9 +19,24 @@ public class Players {
         points = 0;
     }
 
+    public void addMatchPoint() { matchPoints = matchPoints +1; }
+
+    public void resetMatchPoints() { matchPoints = 0; }
+
 
     public int getScore() {
         return points;
 
     }
+
+    public int getMatchPoints() {
+        return matchPoints;
+
+    }
+
+    public int howManyMatchPointsDoWeHave(Players player1, Players player2) {
+        int allMatchPoints = player1.getMatchPoints() + player2.getMatchPoints();
+        return allMatchPoints;
+    }
+
 }

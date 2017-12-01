@@ -12,12 +12,21 @@ public class GameMonitor {
 
     public void buttonPress(Message message) {
 
-        if (message.getButtonId().equals("1")) {
-            spiel.updateScoreOfPlayer(firstPlayer, message.getActionType());
+         if (message.getButtonId().equals("1")) {
+             spiel.updateScoreOfPlayer(firstPlayer, message.getActionType());
+             if (spiel.hasSomeoneOfThePlayersElevenPointsYet()) {
+                 spiel.updateMatchScoreOfPlayers();
+             }
+
         } else if (message.getButtonId().equals("2")) {
             spiel.updateScoreOfPlayer(secondPlayer, message.getActionType());
+            if (spiel.hasSomeoneOfThePlayersElevenPointsYet()) {
+                spiel.updateMatchScoreOfPlayers();
+            }
+
         }
 
-        System.out.println(String.format("%s vs %s", firstPlayer.getScore(), secondPlayer.getScore()));
+        System.out.println(String.format("%s : %s", firstPlayer.getScore(), secondPlayer.getScore()));
+        System.out.println(String.format("%s:%s", firstPlayer.getMatchPoints(), secondPlayer.getMatchPoints()));
     }
 }
