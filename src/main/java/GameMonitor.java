@@ -27,7 +27,7 @@ public class GameMonitor {
         }
 
         System.out.println(String.format("%s : %s", firstPlayer.getSetScore(), secondPlayer.getSetScore()));
-        System.out.println(String.format("%s:%s", firstPlayer.getMatchPoints(), secondPlayer.getMatchPoints()));
+        System.out.println(String.format("%s:%s", firstPlayer.getMatchScore(), secondPlayer.getMatchScore()));
     }
 }
 

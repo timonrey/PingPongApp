@@ -29,7 +29,7 @@ public class Game {
     }
 
     public boolean isMatchOver() {
-        return (playerOne.getMatchPoints() == 2 || playerTwo.getMatchPoints() == 2);
+        return (playerOne.getMatchScore() == 2 || playerTwo.getMatchScore() == 2);
     }
 
 
@@ -52,30 +52,30 @@ public class Game {
 
 
      if (hasPlayerWonSet(playerOne, playerTwo) && !isMatchOver()) {
-         this.playerOne.addMatchPoint();
+         this.playerOne.addMatchScore();
          this.playerOne.reset();
          this.playerTwo.reset();
 
      } else if (hasPlayerWonSet(playerTwo, playerOne) && !isMatchOver()) {
-         this.playerTwo.addMatchPoint();
+         this.playerTwo.addMatchScore();
          this.playerOne.reset();
          this.playerTwo.reset();
 
      }
-     if (this.playerOne.getMatchPoints() == 2) {
+     if (this.playerOne.getMatchScore() == 2) {
             System.out.println("The match is Over! Player1 has won!!!");
             this.playerOne.reset();
             this.playerTwo.reset();
-            this.playerOne.resetMatchPoints();
-            this.playerTwo.resetMatchPoints();
+            this.playerOne.resetMatchScore();
+            this.playerTwo.resetMatchScore();
 
 
-        } else if (this.playerTwo.getMatchPoints() == 2) {
+        } else if (this.playerTwo.getMatchScore() == 2) {
             System.out.println("The match is Over! Player2 has won!!!");
             this.playerOne.reset();
             this.playerTwo.reset();
-            this.playerOne.resetMatchPoints();
-            this.playerTwo.resetMatchPoints();
+            this.playerOne.resetMatchScore();
+            this.playerTwo.resetMatchScore();
 
 
         }

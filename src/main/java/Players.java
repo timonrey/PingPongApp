@@ -1,36 +1,36 @@
 public class Players {
 
-    int points = 0;
-    int matchPoints;
+    int setScore = 0;
+    int matchScore;
 
     public Players() {
 
     }
 
     public void add () {
-        points = points +1;
+        setScore = setScore +1;
     }
 
     public void sub () {
-        points = points - 1;
+        setScore = setScore - 1;
     }
 
     public void reset () {
-        points = 0;
+        setScore = 0;
     }
 
-    public void addMatchPoint() { matchPoints = matchPoints +1; }
+    public void addMatchScore() { matchScore = matchScore +1; }
 
-    public void resetMatchPoints() { matchPoints = 0; }
+    public void resetMatchScore() { matchScore = 0; }
 
 
     public int getSetScore() {
-        return points;
+        return setScore;
 
     }
 
-    public int getMatchPoints() {
-        return matchPoints;
+    public int getMatchScore() {
+        return matchScore;
 
     }
 
