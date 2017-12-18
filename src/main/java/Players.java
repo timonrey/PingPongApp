@@ -24,7 +24,7 @@ public class Players {
     public void resetMatchPoints() { matchPoints = 0; }
 
 
-    public int getScore() {
+    public int getSetScore() {
         return points;
 
     }

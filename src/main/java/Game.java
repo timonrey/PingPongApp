@@ -9,18 +9,18 @@ public class Game {
     }
 
     public boolean hasSomebodyWon() {
-        return (hasPlayerWon(playerOne, playerTwo) || hasPlayerWon(playerTwo, playerOne));
+        return (hasPlayerWonSet(playerOne, playerTwo) || hasPlayerWonSet(playerTwo, playerOne));
     }
 
     public boolean hasSomeOneOfThePlayersTwoPointsMore() {
-        return  (Math.abs(this.playerOne.getScore() - this.playerTwo.getScore()) == 2);
+        return  (Math.abs(this.playerOne.getSetScore() - this.playerTwo.getSetScore()) == 2);
     }
 
-    public boolean hasPlayerWon(Players playerWhoIsWinning, Players playerWhoIsLoosing) {
-        if (playerWhoIsWinning.getScore() == 11 && playerWhoIsLoosing.getScore() < 10) {
+    public boolean hasPlayerWonSet(Players playerWhoIsWinning, Players playerWhoIsLoosing) {
+        if (playerWhoIsWinning.getSetScore() == 11 && playerWhoIsLoosing.getSetScore() < 10) {
             return true;
 
-        } else if (playerWhoIsWinning.getScore() >= 11 && playerWhoIsLoosing.getScore() >= 10) {
+        } else if (playerWhoIsWinning.getSetScore() >= 11 && playerWhoIsLoosing.getSetScore() >= 10) {
             return hasSomeOneOfThePlayersTwoPointsMore();
 
         } else {
@@ -28,7 +28,7 @@ public class Game {
         }
     }
 
-    public boolean isTheGameOver() {
+    public boolean isMatchOver() {
         return (playerOne.getMatchPoints() == 2 || playerTwo.getMatchPoints() == 2);
     }
 
@@ -38,7 +38,7 @@ public class Game {
         if (actionType == 1 && !hasSomebodyWon()) {
             player.add();
 
-        } else if (actionType == 2 && player.getScore() > 0) {
+        } else if (actionType == 2 && player.getSetScore() > 0) {
             player.sub();
 
         } else if (actionType == 3) {
@@ -51,12 +51,12 @@ public class Game {
 
 
 
-     if (hasPlayerWon(playerOne, playerTwo) && !isTheGameOver()) {
+     if (hasPlayerWonSet(playerOne, playerTwo) && !isMatchOver()) {
          this.playerOne.addMatchPoint();
          this.playerOne.reset();
          this.playerTwo.reset();
 
-     } else if (hasPlayerWon(playerTwo, playerOne) && !isTheGameOver()) {
+     } else if (hasPlayerWonSet(playerTwo, playerOne) && !isMatchOver()) {
          this.playerTwo.addMatchPoint();
          this.playerOne.reset();
          this.playerTwo.reset();

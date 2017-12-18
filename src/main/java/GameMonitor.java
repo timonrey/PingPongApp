@@ -2,31 +2,32 @@ public class GameMonitor {
 
     Players firstPlayer;
     Players secondPlayer;
-    Game game;
+    Game match;
 
     public GameMonitor () {
         this.firstPlayer = new Players();
         this.secondPlayer = new Players();
-        this.game = new Game(firstPlayer, secondPlayer);
+        this.match = new Game(firstPlayer, secondPlayer);
     }
 
     public void buttonPress(Message message) {
 
          if (message.getButtonId().equals("1")) {
-             game.updateScoreOfPlayer(firstPlayer, message.getActionType());
-             if (game.hasSomebodyWon()) {
-                 game.updateMatchScoreOfPlayers();
+             match.updateScoreOfPlayer(firstPlayer, message.getActionType());
+             if (match.hasSomebodyWon()) {
+                 match.updateMatchScoreOfPlayers();
              }
 
         } else if (message.getButtonId().equals("2")) {
-            game.updateScoreOfPlayer(secondPlayer, message.getActionType());
-            if (game.hasSomebodyWon()) {
-                game.updateMatchScoreOfPlayers();
+            match.updateScoreOfPlayer(secondPlayer, message.getActionType());
+            if (match.hasSomebodyWon()) {
+                match.updateMatchScoreOfPlayers();
             }
 
         }
 
-        System.out.println(String.format("%s : %s", firstPlayer.getScore(), secondPlayer.getScore()));
+        System.out.println(String.format("%s : %s", firstPlayer.getSetScore(), secondPlayer.getSetScore()));
         System.out.println(String.format("%s:%s", firstPlayer.getMatchPoints(), secondPlayer.getMatchPoints()));
     }
 }
+
