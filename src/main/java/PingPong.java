@@ -15,15 +15,15 @@ public class PingPong {
     public static void main(String[] args) throws Exception {
         GameMonitor monitor = new GameMonitor();
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-        server.createContext("/click", new MyHandler(monitor));
+        server.createContext("/click", new PingPongServer(monitor));
         server.setExecutor(null); // creates a default executor
         server.start();
     }
 
-    static class MyHandler implements HttpHandler {
+    static class PingPongServer implements HttpHandler {
         private GameMonitor monitor;
-        public MyHandler (GameMonitor irgendeinname) {
-            this.monitor = irgendeinname;
+        public PingPongServer(GameMonitor monitor) {
+            this.monitor = monitor;
         }
         @Override
         public void handle(HttpExchange t) throws IOException {
