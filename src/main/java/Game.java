@@ -9,37 +9,25 @@ public class Game {
     }
 
     public boolean hasSomebodyWon() {
-        return (hasThePlayerOneWon() || hasThePlayerTwoWon());
+        return (hasPlayerWon(playerOne, playerTwo) || hasPlayerWon(playerTwo, playerOne));
     }
 
     public boolean hasSomeOneOfThePlayersTwoPointsMore() {
         return  (Math.abs(this.playerOne.getScore() - this.playerTwo.getScore()) == 2);
     }
 
-    public boolean hasThePlayerOneWon() {
-        if (this.playerOne.getScore() == 11 && this.playerTwo.getScore() < 10) {
+    public boolean hasPlayerWon(Players playerWhoIsWinning, Players playerWhoIsLoosing) {
+        if (playerWhoIsWinning.getScore() == 11 && playerWhoIsLoosing.getScore() < 10) {
             return true;
 
-        } else if (this.playerOne.getScore() >= 11 && this.playerTwo.getScore() >= 10) {
+        } else if (playerWhoIsWinning.getScore() >= 11 && playerWhoIsLoosing.getScore() >= 10) {
             return hasSomeOneOfThePlayersTwoPointsMore();
 
         } else {
             return false;
         }
     }
-
-    public boolean hasThePlayerTwoWon() {
-        if (this.playerTwo.getScore() == 11 && this.playerOne.getScore() < 10) {
-            return true;
-
-        } else if (this.playerTwo.getScore() >= 11 && this.playerOne.getScore() >= 10) {
-            return hasSomeOneOfThePlayersTwoPointsMore();
-
-        } else {
-            return false;
-        }
-    }
-
+    
     public boolean isTheGameOver() {
         return (playerOne.getMatchPoints() == 2 || playerTwo.getMatchPoints() == 2);
     }
@@ -63,12 +51,12 @@ public class Game {
 
 
 
-     if (hasThePlayerOneWon() && !isTheGameOver()) {
+     if (hasPlayerWon(playerOne, playerTwo) && !isTheGameOver()) {
          this.playerOne.addMatchPoint();
          this.playerOne.reset();
          this.playerTwo.reset();
 
-     } else if (hasThePlayerTwoWon() && !isTheGameOver()) {
+     } else if (hasPlayerWon(playerTwo, playerOne) && !isTheGameOver()) {
          this.playerTwo.addMatchPoint();
          this.playerOne.reset();
          this.playerTwo.reset();
