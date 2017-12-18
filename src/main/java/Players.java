@@ -33,10 +33,5 @@ public class Players {
         return matchPoints;
 
     }
-
-    public int howManyMatchPointsDoWeHave(Players player1, Players player2) {
-        int allMatchPoints = player1.getMatchPoints() + player2.getMatchPoints();
-        return allMatchPoints;
-    }
-
+    
 }
