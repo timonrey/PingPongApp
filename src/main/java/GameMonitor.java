@@ -14,13 +14,13 @@ public class GameMonitor {
 
          if (message.getButtonId().equals("1")) {
              spiel.updateScoreOfPlayer(firstPlayer, message.getActionType());
-             if (spiel.hasSomeoneOfThePlayersElevenPointsYet()) {
+             if (spiel.hasSomebodyWon()) {
                  spiel.updateMatchScoreOfPlayers();
              }
 
         } else if (message.getButtonId().equals("2")) {
             spiel.updateScoreOfPlayer(secondPlayer, message.getActionType());
-            if (spiel.hasSomeoneOfThePlayersElevenPointsYet()) {
+            if (spiel.hasSomebodyWon()) {
                 spiel.updateMatchScoreOfPlayers();
             }
 

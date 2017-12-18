@@ -8,7 +8,7 @@ public class Game {
         this.playerTwo = secondPlayer;
     }
 
-    public boolean hasSomeoneOfThePlayersElevenPointsYet() {
+    public boolean hasSomebodyWon() {
         return (hasThePlayerOneWon() || hasThePlayerTwoWon());
     }
 
@@ -47,7 +47,7 @@ public class Game {
 
     public void updateScoreOfPlayer(Players player, int actionType) {
 
-        if (actionType == 1 && !hasSomeoneOfThePlayersElevenPointsYet()) {
+        if (actionType == 1 && !hasSomebodyWon()) {
             player.add();
 
         } else if (actionType == 2 && player.getScore() > 0) {
