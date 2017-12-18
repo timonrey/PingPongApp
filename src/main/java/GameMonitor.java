@@ -2,26 +2,26 @@ public class GameMonitor {
 
     Players firstPlayer;
     Players secondPlayer;
-    Game spiel;
+    Game game;
 
     public GameMonitor () {
         this.firstPlayer = new Players();
         this.secondPlayer = new Players();
-        this.spiel = new Game(firstPlayer, secondPlayer);
+        this.game = new Game(firstPlayer, secondPlayer);
     }
 
     public void buttonPress(Message message) {
 
          if (message.getButtonId().equals("1")) {
-             spiel.updateScoreOfPlayer(firstPlayer, message.getActionType());
-             if (spiel.hasSomebodyWon()) {
-                 spiel.updateMatchScoreOfPlayers();
+             game.updateScoreOfPlayer(firstPlayer, message.getActionType());
+             if (game.hasSomebodyWon()) {
+                 game.updateMatchScoreOfPlayers();
              }
 
         } else if (message.getButtonId().equals("2")) {
-            spiel.updateScoreOfPlayer(secondPlayer, message.getActionType());
-            if (spiel.hasSomebodyWon()) {
-                spiel.updateMatchScoreOfPlayers();
+            game.updateScoreOfPlayer(secondPlayer, message.getActionType());
+            if (game.hasSomebodyWon()) {
+                game.updateMatchScoreOfPlayers();
             }
 
         }

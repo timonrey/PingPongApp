@@ -27,7 +27,7 @@ public class Game {
             return false;
         }
     }
-    
+
     public boolean isTheGameOver() {
         return (playerOne.getMatchPoints() == 2 || playerTwo.getMatchPoints() == 2);
     }
