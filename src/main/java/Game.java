@@ -28,7 +28,7 @@ public class Game {
         }
     }
 
-    public boolean whichPlayerSide(Players playerOne, Players playerTwo) {
+    public boolean isSetScoreEven(Players playerOne, Players playerTwo) {
         return ((playerOne.getMatchScore() + playerTwo.getMatchScore()) % 2 == 0);
 
     }
