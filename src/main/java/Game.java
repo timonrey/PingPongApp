@@ -12,7 +12,7 @@ public class Game {
         return (hasPlayerWonSet(playerOne, playerTwo) || hasPlayerWonSet(playerTwo, playerOne));
     }
 
-    public boolean hasSomeOneOfThePlayersTwoPointsMore() {
+    public boolean hasSomeoneOfPlayersTwoPointsMore() {
         return  (Math.abs(this.playerOne.getSetScore() - this.playerTwo.getSetScore()) == 2);
     }
 
@@ -21,12 +21,19 @@ public class Game {
             return true;
 
         } else if (playerWhoIsWinning.getSetScore() >= 11 && playerWhoIsLoosing.getSetScore() >= 10) {
-            return hasSomeOneOfThePlayersTwoPointsMore();
+            return hasSomeoneOfPlayersTwoPointsMore();
 
         } else {
             return false;
         }
     }
+
+    public boolean whichPlayerSide(Players playerOne, Players playerTwo) {
+        return ((playerOne.getMatchScore() + playerTwo.getMatchScore()) % 2 == 0);
+
+    }
+
+
 
     public boolean isMatchOver() {
         return (playerOne.getMatchScore() == 2 || playerTwo.getMatchScore() == 2);
