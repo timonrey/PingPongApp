@@ -12,8 +12,8 @@ public class Game {
         return (hasPlayerWonSet(playerOne, playerTwo) || hasPlayerWonSet(playerTwo, playerOne));
     }
 
-    public boolean hasSomeoneOfPlayersTwoPointsMore() {
-        return  (Math.abs(this.playerOne.getSetScore() - this.playerTwo.getSetScore()) == 2);
+    public boolean hasSomeoneOfPlayersTwoPointsMore(Players playerWhoIsWinning, Players playerWhoIsLoosing) {
+        return (playerWhoIsWinning.getSetScore() - playerWhoIsLoosing.getSetScore() == 2);
     }
 
     public boolean hasPlayerWonSet(Players playerWhoIsWinning, Players playerWhoIsLoosing) {
@@ -21,7 +21,7 @@ public class Game {
             return true;
 
         } else if (playerWhoIsWinning.getSetScore() >= 11 && playerWhoIsLoosing.getSetScore() >= 10) {
-            return hasSomeoneOfPlayersTwoPointsMore();
+            return hasSomeoneOfPlayersTwoPointsMore(playerWhoIsWinning, playerWhoIsLoosing);
 
         } else {
             return false;

@@ -14,12 +14,16 @@ public class GameMonitor {
     public Players playerWhoPressedButton(Message message) {
 
         if (message.getButtonId().equals("1") && match.isSetScoreEven(firstPlayer, secondPlayer)) {
+            System.out.println("player one pressed");
             return  this.firstPlayer;
         } else if (message.getButtonId().equals("2") && match.isSetScoreEven(firstPlayer, secondPlayer)) {
+            System.out.println("player two pressed");
             return this.secondPlayer;
         } else if (message.getButtonId().equals("1")) {
+            System.out.println("player two pressed");
             return this.secondPlayer;
         } else {
+            System.out.println("player one pressed");
             return this.firstPlayer;
         }
 
