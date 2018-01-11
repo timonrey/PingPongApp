@@ -1,9 +1,9 @@
 public class Game {
 
-    Players playerOne;
-    Players playerTwo;
+    Player playerOne;
+    Player playerTwo;
 
-    public Game(Players firstPlayer, Players secondPlayer) {
+    public Game(Player firstPlayer, Player secondPlayer) {
         this.playerOne = firstPlayer;
         this.playerTwo = secondPlayer;
     }
@@ -12,11 +12,11 @@ public class Game {
         return (hasPlayerWonSet(playerOne, playerTwo) || hasPlayerWonSet(playerTwo, playerOne));
     }
 
-    public boolean hasSomeoneOfPlayersTwoPointsMore(Players playerWhoIsWinning, Players playerWhoIsLoosing) {
+    public boolean hasSomeoneOfPlayersTwoPointsMore(Player playerWhoIsWinning, Player playerWhoIsLoosing) {
         return (playerWhoIsWinning.getSetScore() - playerWhoIsLoosing.getSetScore() == 2);
     }
 
-    public boolean hasPlayerWonSet(Players playerWhoIsWinning, Players playerWhoIsLoosing) {
+    public boolean hasPlayerWonSet(Player playerWhoIsWinning, Player playerWhoIsLoosing) {
         if (playerWhoIsWinning.getSetScore() == 11 && playerWhoIsLoosing.getSetScore() < 10) {
             return true;
 
@@ -28,11 +28,10 @@ public class Game {
         }
     }
 
-    public boolean isSetScoreEven(Players playerOne, Players playerTwo) {
+    public boolean isSetScoreEven(Player playerOne, Player playerTwo) {
         return ((playerOne.getMatchScore() + playerTwo.getMatchScore()) % 2 == 0);
 
     }
-
 
 
     public boolean isMatchOver() {
@@ -40,7 +39,7 @@ public class Game {
     }
 
 
-    public void updateScoreOfPlayer(Players player, int actionType) {
+    public void updateScoreOfPlayer(Player player, int actionType) {
 
         if (actionType == 1 && !hasSomebodyWon()) {
             player.add();
