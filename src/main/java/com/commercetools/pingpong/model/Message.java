@@ -1,3 +1,5 @@
+package com.commercetools.pingpong.model;
+
 public class Message {
 
     String buttonId;

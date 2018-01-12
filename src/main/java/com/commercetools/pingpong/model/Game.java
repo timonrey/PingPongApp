@@ -1,7 +1,8 @@
-public class Game {
+package com.commercetools.pingpong.model;
 
-    Player playerOne;
-    Player playerTwo;
+public class Game {
+    private Player playerOne;
+    private Player playerTwo;
 
     public Game(Player firstPlayer, Player secondPlayer) {
         this.playerOne = firstPlayer;
@@ -28,7 +29,7 @@ public class Game {
         }
     }
 
-    public boolean isSetScoreEven(Player playerOne, Player playerTwo) {
+    public boolean isSetScoreEven() {
         return ((playerOne.getMatchScore() + playerTwo.getMatchScore()) % 2 == 0);
 
     }
@@ -54,22 +55,19 @@ public class Game {
     }
 
     public void updateMatchScoreOfPlayers() {
+        if (hasPlayerWonSet(playerOne, playerTwo) && !isMatchOver()) {
+            this.playerOne.addMatchScore();
+            this.playerOne.reset();
+            this.playerTwo.reset();
 
+        } else if (hasPlayerWonSet(playerTwo, playerOne) && !isMatchOver()) {
+            this.playerTwo.addMatchScore();
+            this.playerOne.reset();
+            this.playerTwo.reset();
 
-
-     if (hasPlayerWonSet(playerOne, playerTwo) && !isMatchOver()) {
-         this.playerOne.addMatchScore();
-         this.playerOne.reset();
-         this.playerTwo.reset();
-
-     } else if (hasPlayerWonSet(playerTwo, playerOne) && !isMatchOver()) {
-         this.playerTwo.addMatchScore();
-         this.playerOne.reset();
-         this.playerTwo.reset();
-
-     }
-     if (this.playerOne.getMatchScore() == 2) {
-            System.out.println("The match is Over! Player1 has won!!!");
+        }
+        if (this.playerOne.getMatchScore() == 2) {
+            //System.out.println("The match is Over! Player1 has won!!!");
             this.playerOne.reset();
             this.playerTwo.reset();
             this.playerOne.resetMatchScore();
@@ -77,15 +75,21 @@ public class Game {
 
 
         } else if (this.playerTwo.getMatchScore() == 2) {
-            System.out.println("The match is Over! Player2 has won!!!");
+            //System.out.println("The match is Over! Player2 has won!!!");
             this.playerOne.reset();
             this.playerTwo.reset();
             this.playerOne.resetMatchScore();
             this.playerTwo.resetMatchScore();
-
-
         }
 
+    }
+
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public Player getPlayerTwo() {
+        return playerTwo;
     }
 
 }
