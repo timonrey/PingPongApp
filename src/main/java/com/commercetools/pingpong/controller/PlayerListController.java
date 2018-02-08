@@ -33,7 +33,7 @@ public class PlayerListController {
         return "leaderboard";
     }
 
-    @RequestMapping("/create")
+    /**@RequestMapping("/create")
     public String createPlayer(Model model) {
         return "player";
     }
@@ -42,5 +42,6 @@ public class PlayerListController {
     public String deletePlayer(Model model) {
         return "player";
     }
+     **/
 }
 
