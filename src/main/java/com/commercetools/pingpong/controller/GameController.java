@@ -3,6 +3,7 @@ package com.commercetools.pingpong.controller;
 import com.commercetools.pingpong.model.Message;
 import com.commercetools.pingpong.model.Player;
 import com.commercetools.pingpong.service.GameService;
+import com.sun.tools.javac.util.BasicDiagnosticFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,17 @@ public class GameController {
     }
 
     @RequestMapping(path = "/score")
-    public void updateScore(@RequestParam(value="player", required = false) String player, Model model) {
+    public void updateScorePlusOne(@RequestParam(value="player", required = false) String player, Model model) {
         gameService.updateScore(new Message(player, 1));
+    }
+
+    @RequestMapping(path = "/delete")
+    public void updateScoreDelete(@RequestParam(value="player", required = false) String player, Model model) {
+        gameService.updateScore(new Message(player, 2));
+    }
+
+    @RequestMapping(path = "/reset")
+    public void updateScoreReset(@RequestParam(value="player", required = false) String player, Model model) {
+        gameService.updateScore(new Message(player, 3));
     }
 }
