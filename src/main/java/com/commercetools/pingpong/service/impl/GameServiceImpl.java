@@ -25,9 +25,9 @@ public class GameServiceImpl implements GameService{
     }
 
     private Player getPlayer(final Message message) {
-        if (message.getButtonId().equals("1") && match.isSetScoreEven()) {
+        if (message.getButtonId().equals("1") && match.isMatchScoreEven()) {
             return match.getPlayerOne();
-        } else if (message.getButtonId().equals("2") && match.isSetScoreEven()) {
+        } else if (message.getButtonId().equals("2") && match.isMatchScoreEven()) {
             return match.getPlayerTwo();
         } else if (message.getButtonId().equals("1")) {
             return match.getPlayerTwo();
@@ -38,12 +38,12 @@ public class GameServiceImpl implements GameService{
 
     @Override
     public Player getLeftPlayer() {
-        return match.isSetScoreEven() ? match.getPlayerOne() : match.getPlayerTwo();
+        return match.isMatchScoreEven() ? match.getPlayerOne() : match.getPlayerTwo();
     }
 
     @Override
     public Player getRightPlayer() {
-        return match.isSetScoreEven() ? match.getPlayerTwo() : match.getPlayerOne();
+        return match.isMatchScoreEven() ? match.getPlayerTwo() : match.getPlayerOne();
     }
 }
 
