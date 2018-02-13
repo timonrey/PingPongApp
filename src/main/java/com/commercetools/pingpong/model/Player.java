@@ -31,6 +31,7 @@ public class Player {
 
     public void reset() {
         setScore = 0;
+        matchScore = 0;
     }
 
     public void addMatchScore() {

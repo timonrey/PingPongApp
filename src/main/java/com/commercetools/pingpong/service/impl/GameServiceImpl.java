@@ -22,6 +22,10 @@ public class GameServiceImpl implements GameService{
         if (match.hasSomebodyWon()) {
             match.updateMatchScoreOfPlayers();
         }
+        /**if (match.isMatchOver()) {
+            match = new Game(match.getPlayerOne(), match.getPlayerTwo());
+        }**/
+
     }
 
     private Player getPlayer(final Message message) {

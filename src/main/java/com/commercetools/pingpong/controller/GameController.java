@@ -1,9 +1,7 @@
 package com.commercetools.pingpong.controller;
 
 import com.commercetools.pingpong.model.Message;
-import com.commercetools.pingpong.model.Player;
 import com.commercetools.pingpong.service.GameService;
-import com.sun.tools.javac.util.BasicDiagnosticFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

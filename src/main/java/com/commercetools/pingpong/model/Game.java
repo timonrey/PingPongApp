@@ -34,7 +34,6 @@ public class Game {
 
     }
 
-
     public boolean isMatchOver() {
         return (playerOne.getMatchScore() == 2 || playerTwo.getMatchScore() == 2);
     }
