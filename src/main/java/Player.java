@@ -1,25 +1,21 @@
-public class Players {
+public class Player {
 
-    int setScore = 0;
+    int setScore;
     int matchScore;
 
-    public Players() {
-
-    }
-
     public void add () {
-        setScore = setScore +1;
+        setScore++;
     }
 
     public void sub () {
-        setScore = setScore - 1;
+        setScore--;
     }
 
     public void reset () {
         setScore = 0;
     }
 
-    public void addMatchScore() { matchScore = matchScore +1; }
+    public void addMatchScore() { matchScore++; }
 
     public void resetMatchScore() { matchScore = 0; }
 
@@ -33,5 +29,6 @@ public class Players {
         return matchScore;
 
     }
+
 
 }
