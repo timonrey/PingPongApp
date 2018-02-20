@@ -20,7 +20,20 @@ public class GameController {
     public String getPlayers(Model model) {
         model.addAttribute("rightPlayer", gameService.getRightPlayer());
         model.addAttribute("leftPlayer", gameService.getLeftPlayer());
+        model.addAttribute("servingPlayer", servingPlayer());
         return "current-game";
+    }
+
+
+        public  String servingPlayer() {
+        if (gameService.getRightPlayerServe() == true) {
+            return "Serving Player: Philipp";
+
+        } else if (gameService.getLeftPlayerServe() == true) {
+            return "Serving Player: Nicola";
+    // FIXME: names will be changed later
+        }
+        return "Um die Angabe";
     }
 
     @RequestMapping(path = "/score", method = RequestMethod.POST)
