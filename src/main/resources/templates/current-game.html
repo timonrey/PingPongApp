@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Current Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{css/stylesheet-base.css}" rel="stylesheet"/>
+    <link th:href="@{css/stylesheet-current-game.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="banner">
+    <div class="contentOne">
+        <h1>
+            <a th:href="@{/list}">
+                <font color="orange">
+                      Leaderboard
+            </font>
+            </a>
+        </h1>
+    </div>
+    <div class="contentTwo">
+        <h1>
+            Current Game
+        </h1>
+    </div>
+</div>
+<br/>
+<br/>
+<i>
+    <h1>
+        <center>
+            Here you can see the current game!
+        </center>
+    </h1>
+</i>
+<br/>
+<br/>
+    <br/>
+    <div id="setScoreLeft">
+        <h1 th:text="${leftPlayer.getSetScore()}">
+        </h1>
+    </div>
+    <div id="setScoreRight">
+        <h1 th:text="${rightPlayer.getSetScore()}">
+        </h1>
+    </div>
+    <br/>
+    <div id="matchScoreLeft">
+        <h2 th:text="${leftPlayer.getMatchScore()}">
+        </h2>
+    </div>
+    <div id="matchScoreRight">
+        <h2 th:text="${rightPlayer.getMatchScore()}">
+        </h2>
+    </div>
+    <script th:src="@{js/score-fetcher.js}" type="application/javascript"></script>
+</body>
+</html>
