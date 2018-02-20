@@ -13,19 +13,19 @@ public class GameServiceImpl implements GameService{
     public GameServiceImpl() {
         this.match = new Game(new Player("HeshamOne"), new Player("HeshamTwo"));
     }
+    // FIXME: These hardcoded values will be removed later
 
     @Override
     public void updateScore(final Message message) {
         Player actingPlayer = getPlayer(message);
-        match.updateScoreOfPlayer(actingPlayer, message.getActionType());
-
+        if (match.areBothScoresZero() && !match.isSomeoneServing()) {
+            match.setFirstServe(actingPlayer);
+        } else {
+            match.updateScoreOfPlayer(actingPlayer, message.getActionType());
+        }
         if (match.hasSomebodyWon()) {
             match.updateMatchScoreOfPlayers();
         }
-        /**if (match.isMatchOver()) {
-            match = new Game(match.getPlayerOne(), match.getPlayerTwo());
-        }**/
-
     }
 
     private Player getPlayer(final Message message) {
@@ -49,6 +49,12 @@ public class GameServiceImpl implements GameService{
     public Player getRightPlayer() {
         return match.isMatchScoreEven() ? match.getPlayerTwo() : match.getPlayerOne();
     }
+
+    @Override
+    public boolean getLeftPlayerServe() {return match.getPlayerOneServe();}
+
+    @Override
+    public boolean getRightPlayerServe() {return match.getPlayerTwoServe();}
 }
 
 // {"button" : "1", "actionType": "1"}

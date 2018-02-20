@@ -10,4 +10,6 @@ public interface GameService {
     void updateScore(final Message message);
     Player getLeftPlayer();
     Player getRightPlayer();
+    boolean getLeftPlayerServe();
+    boolean getRightPlayerServe();
 }
