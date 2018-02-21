@@ -1,12 +1,12 @@
 package com.commercetools.pingpong.controller;
 
-        import com.commercetools.pingpong.model.Message;
-        import com.commercetools.pingpong.service.GameService;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.*;
+import com.commercetools.pingpong.model.Message;
+import com.commercetools.pingpong.service.GameService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/game")
@@ -26,10 +26,10 @@ public class GameController {
 
 
         public  String servingPlayer() {
-        if (gameService.getRightPlayerServe() == true) {
+        if (gameService.getRightPlayerServe()) {
             return "Serving Player: Philipp";
 
-        } else if (gameService.getLeftPlayerServe() == true) {
+        } else if (gameService.getLeftPlayerServe()) {
             return "Serving Player: Nicola";
     // FIXME: names will be changed later
         }

@@ -1,6 +1,5 @@
 package com.commercetools.pingpong.model;
 
-import com.sun.tools.javac.util.BasicDiagnosticFormatter;
 
 public class Game {
     private Player playerOne;
@@ -14,11 +13,11 @@ public class Game {
     public void updateScoreOfPlayer(Player player, int actionType) {
 
         if (actionType == 1 && !hasSomebodyWon()) {
-            player.add();
+            player.addPoint();
             decideWhoServes();
 
         } else if (actionType == 2 && player.getSetScore() > 0) {
-            player.sub();
+            player.subPoint();
 
         } else if (actionType == 3) {
             resetSetScores();
@@ -38,17 +37,10 @@ public class Game {
             this.playerTwo.addMatchScore();
             resetSetScores();
 
-        }
-        if (this.playerOne.getMatchScore() == 2) {
+        } else if (this.playerOne.getMatchScore() == 2 || this.playerTwo.getMatchScore() == 2) {
             resetSetScores();
             resetMatchScores();
             resetServe();
-
-        } else if (this.playerTwo.getMatchScore() == 2) {
-            resetSetScores();
-            resetMatchScores();
-            resetServe();
-
         }
 
     }
@@ -78,8 +70,8 @@ public class Game {
     }
 
     public void resetSetScores(){
-        playerOne.reset();
-        playerTwo.reset();
+        playerOne.resetSet();
+        playerTwo.resetSet();
     }
 
     public void resetMatchScores() {
@@ -130,20 +122,20 @@ public class Game {
 
     public void decideWhoServes() {
         if (areBothScoresZero()) {
-
-        } else if (isOvertime(playerOne, playerTwo) && playerOne.amIServing() == true) {
+            return;
+        } else if (isOvertime(playerOne, playerTwo) && playerOne.amIServing()) {
             playerOne.changeServe();
             playerTwo.setServe();
 
-        } else if (isOvertime(playerOne, playerTwo) && playerTwo.amIServing() == true) {
+        } else if (isOvertime(playerOne, playerTwo) && playerTwo.amIServing()) {
             playerTwo.changeServe();
             playerOne.setServe();
 
-        } else if (playerOne.amIServing() == true && isSetScoreEven()) {
+        } else if (playerOne.amIServing() && isSetScoreEven()) {
             playerOne.changeServe();
             playerTwo.setServe();
 
-        } else if (playerTwo.amIServing() == true && isSetScoreEven()) {
+        } else if (playerTwo.amIServing() && isSetScoreEven()) {
             playerTwo.changeServe();
             playerOne.setServe();
         }

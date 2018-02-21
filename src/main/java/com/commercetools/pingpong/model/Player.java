@@ -22,15 +22,15 @@ public class Player {
     public Player() {
     }
 
-    public void add() {
+    public void addPoint() {
         setScore++;
     }
 
-    public void sub() {
+    public void subPoint() {
         setScore--;
     }
 
-    public void reset() {
+    public void resetSet() {
         setScore = 0;
     }
 
