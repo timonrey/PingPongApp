@@ -33,10 +33,12 @@ public class Game {
         if (hasPlayerWonSet(playerOne, playerTwo) && !isMatchOver()) {
             this.playerOne.addMatchScore();
             resetSetScores();
+            setBeginningServe();
 
         } else if (hasPlayerWonSet(playerTwo, playerOne) && !isMatchOver()) {
             this.playerTwo.addMatchScore();
             resetSetScores();
+            setBeginningServe();
         }
     }
 
@@ -45,10 +47,12 @@ public class Game {
             resetSetScores();
             resetMatchScores();
             resetServe();
+            resetBeginningServe();
         } else if (this.playerTwo.getMatchScore() == 2) {
             resetSetScores();
             resetMatchScores();
             resetServe();
+            resetBeginningServe();
         }
     }
 
@@ -91,9 +95,16 @@ public class Game {
         playerTwo.changeServe();
     }
 
-    public boolean areBothScoresZero() {
+    public void resetBeginningServe() {
+        playerOne.changeBeginningServe();
+        playerTwo.changeBeginningServe();
+    }
+
+    public boolean areBothSetScoresZero() {
         return (playerOne.getSetScore() == 0 && playerTwo.getSetScore() == 0);
     }
+
+    public boolean areBothMatchScoresZero() {return (playerOne.getMatchScore() == 0 && playerTwo.getMatchScore() == 0);}
 
     public boolean isSomeoneServing() {
         return (playerOne.amIServing() || playerTwo.amIServing());
@@ -137,12 +148,30 @@ public class Game {
     }
 
     public void setFirstServe(Player actingPlayer) {
+        actingPlayer.setBeginningServe();
         actingPlayer.setServe();
         }
 
+
+    public void setBeginningServe() {
+        if (playerOne.didIServeAtBeginning()) {
+            playerOne.changeBeginningServe();
+            playerTwo.setBeginningServe();
+            playerOne.changeServe();
+            playerTwo.setServe();
+
+        } else if (playerTwo.didIServeAtBeginning()) {
+            playerTwo.changeBeginningServe();
+            playerOne.setBeginningServe();
+            playerTwo.changeServe();
+            playerOne.setServe();
+        }
+    }
+
     public void decideWhoServes() {
-        if (areBothScoresZero()) {
+        if (areBothSetScoresZero() && areBothMatchScoresZero()) {
             return;
+
         } else if (isOvertime(playerOne, playerTwo) && playerOne.amIServing()) {
             playerOne.changeServe();
             playerTwo.setServe();

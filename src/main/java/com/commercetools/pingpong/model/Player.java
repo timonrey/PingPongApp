@@ -8,6 +8,7 @@ public class Player {
     private int setScore;
     private int matchScore;
     private boolean serve;
+    private boolean beginningServe;
 
     public Player(final String name, final int numberOfGamesWon, final int totalPoints) {
         this.name = name;
@@ -33,6 +34,12 @@ public class Player {
     public void resetSet() {
         setScore = 0;
     }
+
+    public void setBeginningServe() {
+        beginningServe = true;}
+
+    public void changeBeginningServe() {
+        beginningServe = false;}
 
     public void setServe() {
         serve = true;
@@ -74,4 +81,5 @@ public class Player {
 
     public boolean amIServing() {return serve;}
 
+    public boolean didIServeAtBeginning() {return beginningServe;}
 }

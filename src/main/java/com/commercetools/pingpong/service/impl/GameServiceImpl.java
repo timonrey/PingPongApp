@@ -18,7 +18,7 @@ public class GameServiceImpl implements GameService{
     @Override
     public void updateScore(final Message message) {
         Player actingPlayer = getPlayer(message);
-        if (match.areBothScoresZero() && !match.isSomeoneServing()) {
+        if (match.areBothSetScoresZero() && !match.isSomeoneServing()) {
             match.setFirstServe(actingPlayer);
         } else {
             match.updateScoreOfPlayer(actingPlayer, message.getActionType());
