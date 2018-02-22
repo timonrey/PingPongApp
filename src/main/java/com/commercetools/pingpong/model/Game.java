@@ -18,6 +18,7 @@ public class Game {
 
         } else if (actionType == 2 && player.getSetScore() > 0) {
             player.subPoint();
+            whoServesAfterDoubleClick();
 
         } else if (actionType == 3) {
             resetSetScores();
@@ -120,6 +121,19 @@ public class Game {
 
     public boolean isOvertime(Player playerOne, Player playerTwo) {
         return playerOne.getSetScore() >= 10 && playerTwo.getSetScore() >= 10;
+    }
+
+    public void whoServesAfterDoubleClick() {
+        if (!isSetScoreEven()) {
+            if (playerOne.amIServing()) {
+                playerOne.changeServe();
+                playerTwo.setServe();
+
+            } else if (playerTwo.amIServing()) {
+                playerTwo.changeServe();
+                playerOne.setServe();
+            }
+        }
     }
 
     public void setFirstServe(Player actingPlayer) {
