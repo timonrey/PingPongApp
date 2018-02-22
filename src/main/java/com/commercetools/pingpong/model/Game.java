@@ -12,7 +12,7 @@ public class Game {
 
     public void updateScoreOfPlayer(Player player, int actionType) {
 
-        if (actionType == 1 && !hasSomebodyWon()) {
+        if (actionType == 1 && !hasSomebodyWonSet()) {
             player.addPoint();
             decideWhoServes();
 
@@ -36,16 +36,22 @@ public class Game {
         } else if (hasPlayerWonSet(playerTwo, playerOne) && !isMatchOver()) {
             this.playerTwo.addMatchScore();
             resetSetScores();
+        }
+    }
 
-        } else if (this.playerOne.getMatchScore() == 2 || this.playerTwo.getMatchScore() == 2) {
+    public void isGameOver() {
+        if (this.playerOne.getMatchScore() == 2) {
+            resetSetScores();
+            resetMatchScores();
+            resetServe();
+        } else if (this.playerTwo.getMatchScore() == 2) {
             resetSetScores();
             resetMatchScores();
             resetServe();
         }
-
     }
 
-    public boolean hasSomebodyWon() {
+    public boolean hasSomebodyWonSet() {
         return (hasPlayerWonSet(playerOne, playerTwo) || hasPlayerWonSet(playerTwo, playerOne));
     }
 

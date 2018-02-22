@@ -22,10 +22,11 @@ public class GameServiceImpl implements GameService{
             match.setFirstServe(actingPlayer);
         } else {
             match.updateScoreOfPlayer(actingPlayer, message.getActionType());
-        }
-        if (match.hasSomebodyWon()) {
             match.updateMatchScoreOfPlayers();
+            match.isGameOver();
+
         }
+
     }
 
     private Player getPlayer(final Message message) {
