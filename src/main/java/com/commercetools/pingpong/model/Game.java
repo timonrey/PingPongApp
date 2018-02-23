@@ -86,13 +86,13 @@ public class Game {
     }
 
     public void resetServe() {
-        playerOne.changeServe();
-        playerTwo.changeServe();
+        playerOne.unsetServe();
+        playerTwo.unsetServe();
     }
 
     public void resetBeginningServe() {
-        playerOne.changeBeginningServe();
-        playerTwo.changeBeginningServe();
+        playerOne.unsetBeginningServe();
+        playerTwo.unsetBeginningServe();
     }
 
     public boolean areBothSetScoresZero() {
@@ -125,6 +125,18 @@ public class Game {
 
     public boolean getPlayerTwoServe() {return playerTwo.amIServing();}
 
+    public void changeServingPlayer(Player nextServingPlayer, Player lastServingPlayer) {
+        lastServingPlayer.unsetServe();
+        nextServingPlayer.setServe();
+    }
+
+    public void changeBeginningServingPlayer(Player nextServingPlayer, Player lastServingPlayer) {
+        lastServingPlayer.unsetBeginningServe();
+        nextServingPlayer.setBeginningServe();
+        lastServingPlayer.unsetServe();
+        nextServingPlayer.setServe();
+    }
+
     public boolean isOvertime(Player playerOne, Player playerTwo) {
         return playerOne.getSetScore() >= 10 && playerTwo.getSetScore() >= 10;
     }
@@ -132,12 +144,10 @@ public class Game {
     public void whoServesAfterDoubleClick() {
         if (!isSetScoreEven()) {
             if (playerOne.amIServing()) {
-                playerOne.changeServe();
-                playerTwo.setServe();
+                changeServingPlayer(playerTwo, playerOne);
 
             } else if (playerTwo.amIServing()) {
-                playerTwo.changeServe();
-                playerOne.setServe();
+                changeServingPlayer(playerOne, playerTwo);
             }
         }
     }
@@ -150,16 +160,10 @@ public class Game {
 
     public void whoBeginsServing() {
         if (playerOne.didIServeAtBeginning()) {
-            playerOne.changeBeginningServe();
-            playerTwo.setBeginningServe();
-            playerOne.changeServe();
-            playerTwo.setServe();
+            changeBeginningServingPlayer(playerTwo, playerOne);
 
         } else if (playerTwo.didIServeAtBeginning()) {
-            playerTwo.changeBeginningServe();
-            playerOne.setBeginningServe();
-            playerTwo.changeServe();
-            playerOne.setServe();
+            changeBeginningServingPlayer(playerOne, playerTwo);
         }
     }
 
@@ -168,20 +172,16 @@ public class Game {
             return;
 
         } else if (isOvertime(playerOne, playerTwo) && playerOne.amIServing()) {
-            playerOne.changeServe();
-            playerTwo.setServe();
+            changeServingPlayer(playerTwo, playerOne);
 
         } else if (isOvertime(playerOne, playerTwo) && playerTwo.amIServing()) {
-            playerTwo.changeServe();
-            playerOne.setServe();
+            changeServingPlayer(playerOne, playerTwo);
 
         } else if (playerOne.amIServing() && isSetScoreEven()) {
-            playerOne.changeServe();
-            playerTwo.setServe();
+            changeServingPlayer(playerTwo, playerOne);
 
         } else if (playerTwo.amIServing() && isSetScoreEven()) {
-            playerTwo.changeServe();
-            playerOne.setServe();
+            changeServingPlayer(playerOne, playerTwo);
         }
     }
 }
