@@ -36,10 +36,12 @@ public class Player {
     }
 
     public void setBeginningServe() {
-        beginningServe = true;}
+        beginningServe = true;
+    }
 
     public void changeBeginningServe() {
-        beginningServe = false;}
+        beginningServe = false;
+    }
 
     public void setServe() {
         serve = true;
