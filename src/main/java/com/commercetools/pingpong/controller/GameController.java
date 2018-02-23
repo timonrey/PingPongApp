@@ -28,11 +28,11 @@ public class GameController {
 
 
     public String servingPlayer() {
-        if (gameService.getRightPlayerServe()) {
-            return "Serving Player: Philipp";
+        if (gameService.getLeftPlayerServe()) {
+            return "Serving Player: HeshamOne";
 
-        } else if (gameService.getLeftPlayerServe()) {
-            return "Serving Player: Nicola";
+        } else if (gameService.getRightPlayerServe()) {
+            return "Serving Player: HeshamTwo";
             // FIXME: names will be changed later
         }
         return "Um die Angabe";

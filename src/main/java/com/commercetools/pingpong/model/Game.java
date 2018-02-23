@@ -24,6 +24,7 @@ public class Game {
             resetSetScores();
             resetMatchScores();
             resetServe();
+            resetBeginningServe();
 
         }
 
