@@ -7,29 +7,29 @@ import com.commercetools.pingpong.service.GameService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GameServiceImpl implements GameService{
+public class GameServiceImpl implements GameService {
     private Game match;
 
     public GameServiceImpl() {
-        this.match = new Game(new Player("HeshamOne"), new Player("HeshamTwo"));
+        match = new Game(new Player("HeshamOne"), new Player("HeshamTwo"));
     }
     // FIXME: These hardcoded values will be removed later
 
     @Override
-    public void updateScore(final Message message) {
+    public void updateScore(Message message) {
         Player actingPlayer = getPlayer(message);
         if (match.areBothSetScoresZero() && !match.isSomeoneServing()) {
             match.setFirstServe(actingPlayer);
         } else {
             match.updateScoreOfPlayer(actingPlayer, message.getActionType());
             match.updateMatchScoreOfPlayers();
-            match.isGameOver();
+            match.gameOver();
 
         }
 
     }
 
-    private Player getPlayer(final Message message) {
+    private Player getPlayer(Message message) {
         if (message.getButtonId().equals("1") && match.isMatchScoreEven()) {
             return match.getPlayerOne();
         } else if (message.getButtonId().equals("2") && match.isMatchScoreEven()) {
@@ -52,10 +52,14 @@ public class GameServiceImpl implements GameService{
     }
 
     @Override
-    public boolean getLeftPlayerServe() {return match.getPlayerOneServe();}
+    public boolean getLeftPlayerServe() {
+        return match.getPlayerOneServe();
+    }
 
     @Override
-    public boolean getRightPlayerServe() {return match.getPlayerTwoServe();}
+    public boolean getRightPlayerServe() {
+        return match.getPlayerTwoServe();
+    }
 }
 
 // {"button" : "1", "actionType": "1"}

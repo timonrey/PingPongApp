@@ -6,8 +6,8 @@ public class Game {
     private Player playerTwo;
 
     public Game(Player firstPlayer, Player secondPlayer) {
-        this.playerOne = firstPlayer;
-        this.playerTwo = secondPlayer;
+        playerOne = firstPlayer;
+        playerTwo = secondPlayer;
     }
 
     public void updateScoreOfPlayer(Player player, int actionType) {
@@ -31,19 +31,19 @@ public class Game {
 
     public void updateMatchScoreOfPlayers() {
         if (hasPlayerWonSet(playerOne, playerTwo) && !isMatchOver()) {
-            this.playerOne.addMatchScore();
+            playerOne.addMatchScore();
             resetSetScores();
             whoBeginsServing();
 
         } else if (hasPlayerWonSet(playerTwo, playerOne) && !isMatchOver()) {
-            this.playerTwo.addMatchScore();
+            playerTwo.addMatchScore();
             resetSetScores();
             whoBeginsServing();
         }
     }
 
-    public void isGameOver() {
-        if (this.playerOne.getMatchScore() == 2 || this.playerTwo.getMatchScore() == 2) {
+    public void gameOver() {
+        if (isMatchOver()) {
             resetSetScores();
             resetMatchScores();
             resetServe();
