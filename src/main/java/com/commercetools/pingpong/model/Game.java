@@ -43,12 +43,7 @@ public class Game {
     }
 
     public void isGameOver() {
-        if (this.playerOne.getMatchScore() == 2) {
-            resetSetScores();
-            resetMatchScores();
-            resetServe();
-            resetBeginningServe();
-        } else if (this.playerTwo.getMatchScore() == 2) {
+        if (this.playerOne.getMatchScore() == 2 || this.playerTwo.getMatchScore() == 2) {
             resetSetScores();
             resetMatchScores();
             resetServe();
