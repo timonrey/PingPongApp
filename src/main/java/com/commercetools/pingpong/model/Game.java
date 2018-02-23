@@ -145,7 +145,7 @@ public class Game {
     public void setFirstServe(Player actingPlayer) {
         actingPlayer.setBeginningServe();
         actingPlayer.setServe();
-        }
+    }
 
 
     public void setBeginningServe() {
