@@ -75,7 +75,7 @@ public class Game {
         return (winningPlayer.getSetScore() - losingPlayer.getSetScore() == 2);
     }
 
-    public void resetSetScores(){
+    public void resetSetScores() {
         playerOne.resetSet();
         playerTwo.resetSet();
     }
@@ -99,7 +99,9 @@ public class Game {
         return (playerOne.getSetScore() == 0 && playerTwo.getSetScore() == 0);
     }
 
-    public boolean areBothMatchScoresZero() {return (playerOne.getMatchScore() == 0 && playerTwo.getMatchScore() == 0);}
+    public boolean areBothMatchScoresZero() {
+        return (playerOne.getMatchScore() == 0 && playerTwo.getMatchScore() == 0);
+    }
 
     public boolean isSomeoneServing() {
         return (playerOne.amIServing() || playerTwo.amIServing());
@@ -121,9 +123,13 @@ public class Game {
         return playerTwo;
     }
 
-    public boolean getPlayerOneServe() {return playerOne.amIServing();}
+    public boolean getPlayerOneServe() {
+        return playerOne.amIServing();
+    }
 
-    public boolean getPlayerTwoServe() {return playerTwo.amIServing();}
+    public boolean getPlayerTwoServe() {
+        return playerTwo.amIServing();
+    }
 
     public void changeServingPlayer(Player nextServingPlayer, Player lastServingPlayer) {
         lastServingPlayer.unsetServe();

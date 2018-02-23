@@ -10,13 +10,13 @@ public class Player {
     private boolean serve;
     private boolean beginningServe;
 
-    public Player(final String name, final int numberOfGamesWon, final int totalPoints) {
+    public Player(String name, int numberOfGamesWon, int totalPoints) {
         this.name = name;
         this.numberOfGamesWon = numberOfGamesWon;
         this.totalPoints = totalPoints;
     }
 
-    public Player(final String name) {
+    public Player(String name) {
         this.name = name;
     }
 
@@ -38,6 +38,7 @@ public class Player {
     public void setBeginningServe() {
         beginningServe = true;
     }
+
 
     public void unsetBeginningServe() {
         beginningServe = false;
@@ -81,7 +82,11 @@ public class Player {
         return matchScore;
     }
 
-    public boolean amIServing() {return serve;}
+    public boolean amIServing() {
+        return serve;
+    }
 
-    public boolean didIServeAtBeginning() {return beginningServe;}
+    public boolean didIServeAtBeginning() {
+        return beginningServe;
+    }
 }
