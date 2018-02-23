@@ -43,12 +43,11 @@ public class Game {
     }
 
     public void gameOver() {
-        if (isMatchOver()) {
-            resetSetScores();
-            resetMatchScores();
-            resetServe();
-            resetBeginningServe();
-        }
+        resetSetScores();
+        resetMatchScores();
+        resetServe();
+        resetBeginningServe();
+
     }
 
     public boolean hasSomebodyWonSet() {

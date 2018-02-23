@@ -23,7 +23,10 @@ public class GameServiceImpl implements GameService {
         } else {
             match.updateScoreOfPlayer(actingPlayer, message.getActionType());
             match.updateMatchScoreOfPlayers();
-            match.gameOver();
+
+            if (match.isMatchOver()) {
+                match.gameOver();
+            }
 
         }
 
