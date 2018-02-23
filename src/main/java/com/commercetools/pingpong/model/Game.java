@@ -33,12 +33,12 @@ public class Game {
         if (hasPlayerWonSet(playerOne, playerTwo) && !isMatchOver()) {
             this.playerOne.addMatchScore();
             resetSetScores();
-            setBeginningServe();
+            whoBeginsServing();
 
         } else if (hasPlayerWonSet(playerTwo, playerOne) && !isMatchOver()) {
             this.playerTwo.addMatchScore();
             resetSetScores();
-            setBeginningServe();
+            whoBeginsServing();
         }
     }
 
@@ -148,7 +148,7 @@ public class Game {
     }
 
 
-    public void setBeginningServe() {
+    public void whoBeginsServing() {
         if (playerOne.didIServeAtBeginning()) {
             playerOne.changeBeginningServe();
             playerTwo.setBeginningServe();
