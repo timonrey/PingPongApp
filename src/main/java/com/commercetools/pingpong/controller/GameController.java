@@ -54,6 +54,6 @@ public class GameController {
     @ResponseBody
     public String updateScoreReset(@RequestParam(value="player", required = false) String player, Model model) {
         gameService.updateScore(new Message(player, 3));
-        return "Score reseted";
+        return "Score reset";
     }
 }
