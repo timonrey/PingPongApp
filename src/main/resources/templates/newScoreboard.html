@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Scoreboard</title>
+    <!--<link href="../static/css/newScoreboard.css" rel="stylesheet"></link>-->
+    <link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet"></link>
+    <link th:href="@{css/newScoreboard.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="bg bg-blue">
+</div>
+<div class="bg bg-yellow">
+</div>
+<div class="page">
+    <div class="message">
+        <div class="bubble">
+            <h3 th:text="${bubbleMessage}"></h3>
+        </div>
+    </div>
+    <div class="setscore">
+        <h1 th:text="${leftPlayer.getSetScore()}"></h1>
+        <h1>:</h1>
+        <h1 th:text="${rightPlayer.getSetScore()}"></h1>
+    </div>
+    <div class="footer">
+        <div class="left-serve">
+            <h2 th:text="${leftServe}"></h2>
+        </div>
+        <div class="matchscore">
+            <h2 th:text="${leftPlayer.getMatchScore()}"></h2>
+            <h2>:</h2>
+            <h2 th:text="${rightPlayer.getMatchScore()}"></h2>
+        </div>
+        <div class="right-serve">
+            <h2 th:text="${rightServe}"></h2>
+        </div>
+    </div>
+</div>
+<script th:src="@{js/score-fetcher.js}" type="application/javascript"></script>
+</body>
+</html>
