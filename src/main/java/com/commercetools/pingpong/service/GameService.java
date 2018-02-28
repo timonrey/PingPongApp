@@ -7,9 +7,17 @@ import org.springframework.stereotype.Service;
 @Service
 public interface GameService {
 
-    void updateScore(final Message message);
+    void updateScore(Message message);
+
     Player getLeftPlayer();
+
     Player getRightPlayer();
+
     boolean getLeftPlayerServe();
+
     boolean getRightPlayerServe();
+
+    boolean getIfItsOvertime();
+
+    boolean getFirstServingPlayer();
 }

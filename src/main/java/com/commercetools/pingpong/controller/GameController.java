@@ -22,21 +22,43 @@ public class GameController {
     public String getPlayers(Model model) {
         model.addAttribute("rightPlayer", gameService.getRightPlayer());
         model.addAttribute("leftPlayer", gameService.getLeftPlayer());
-        model.addAttribute("servingPlayer", servingPlayer());
-        return "current-game";
+        model.addAttribute("bubbleMessage", getBubbleMessage());
+        model.addAttribute("leftServe", getIfLeftPlayerServes());
+        model.addAttribute("rightServe", getIfRightPlayerServes());
+        return "newScoreboard";
     }
 
 
-    public String servingPlayer() {
+    public String getBubbleMessage() {
+        if (gameService.getFirstServingPlayer()) {
+            return "Play for first serve!";
+
+        } else if (gameService.getIfItsOvertime()) {
+            return "Overtime!";
+        }
+        return "Play!";
+    }
+
+    public String getIfLeftPlayerServes() {
         if (gameService.getLeftPlayerServe()) {
-            return "Serving Player: HeshamOne";
+            return "Serve!";
 
         } else if (gameService.getRightPlayerServe()) {
-            return "Serving Player: HeshamTwo";
-            // FIXME: names will be changed later
+            return "";
         }
-        return "Um die Angabe";
+        return "";
     }
+
+    public String getIfRightPlayerServes() {
+        if (gameService.getRightPlayerServe()) {
+            return "Serve!";
+        } else if (gameService.getLeftPlayerServe()) {
+            return "";
+        }
+
+        return "";
+    }
+
 
     @RequestMapping(path = "/score", method = RequestMethod.POST)
     @ResponseBody

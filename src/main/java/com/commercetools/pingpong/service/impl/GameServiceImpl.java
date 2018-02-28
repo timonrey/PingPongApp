@@ -63,6 +63,16 @@ public class GameServiceImpl implements GameService {
     public boolean getRightPlayerServe() {
         return match.getPlayerTwoServe();
     }
+
+    @Override
+    public boolean getIfItsOvertime() {
+        return match.isOvertime(getLeftPlayer(), getRightPlayer());
+    }
+
+    @Override
+    public boolean getFirstServingPlayer() {
+        return !match.isSomeoneServing();
+    }
 }
 
 // {"button" : "1", "actionType": "1"}
