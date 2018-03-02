@@ -3,8 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Scoreboard</title>
-    <!--<link href="../static/css/newScoreboard.css" rel="stylesheet"></link>-->
-    <link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet"></link>
     <link th:href="@{css/newScoreboard.css}" rel="stylesheet"/>
 </head>
 <body>
@@ -40,3 +38,9 @@
 <script th:src="@{js/score-fetcher.js}" type="application/javascript"></script>
 </body>
 </html>
+
+<!--
+<div th:if="${linea.estado} == 'SUCCESS'" class="label label-success" th:text="#{label.glineas.estado.iniciado}"></div>
+<div th:if="${linea.estado} == 'DANGER'" class="label label-danger" th:text="#{label.glineas.estado.finalizado}"></div>
+<div th:if="${linea.estado} == 'WARN'" class="label label-warning" th:text="#{label.glineas.estado.configurado}"></div>
+-->
