@@ -39,7 +39,6 @@ public class Player {
         beginningServe = true;
     }
 
-
     public void unsetBeginningServe() {
         beginningServe = false;
     }
