@@ -21,6 +21,7 @@ public class PlayerListController {
         final Player player2 = new Player("Roman", 12, 264);
         final Player player3 = new Player("Hasan", 11, 242);
         final Player player4 = new Player("Hesham", 10, 220);
+        // FIXME: Hardcoded players will be replaced later with real players
 
         final List<Player> players = Arrays.asList(player1, player2, player3, player4);
 
@@ -32,16 +33,5 @@ public class PlayerListController {
         }
         return "leaderboard";
     }
-
-    /**@RequestMapping("/create")
-    public String createPlayer(Model model) {
-        return "player";
-    }
-
-    @RequestMapping("/delete")
-    public String deletePlayer(Model model) {
-        return "player";
-    }
-     **/
 }
 
