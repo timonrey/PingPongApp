@@ -1,5 +1,6 @@
 package com.commercetools.pingpong.controller;
 
+import com.commercetools.pingpong.model.ClientMessage;
 import com.commercetools.pingpong.model.Message;
 import com.commercetools.pingpong.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,11 @@ public class GameController {
         return "";
     }
 
+    @RequestMapping(path = "/getupdate", method = RequestMethod.GET)
+    @ResponseBody
+    public String getUpdate() {
+        ClientMessage clientMessage = updateService.getUpdate();
+    }
 
     @RequestMapping(path = "/score", method = RequestMethod.POST)
     @ResponseBody

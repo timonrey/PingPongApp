@@ -1,5 +1,6 @@
 package com.commercetools.pingpong.service.impl;
 
+import com.commercetools.pingpong.controller.DeferredResultService;
 import com.commercetools.pingpong.model.Game;
 import com.commercetools.pingpong.model.Message;
 import com.commercetools.pingpong.model.Player;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class GameServiceImpl implements GameService {
     private Game match;
+    private DeferredResultService updateService;
 
     public GameServiceImpl() {
         match = new Game(new Player("HeshamOne"), new Player("HeshamTwo"));
+        updateService.subscribe();
     }
     // FIXME: These hardcoded values will be removed later
 
