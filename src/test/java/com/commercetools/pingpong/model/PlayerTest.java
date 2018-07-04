@@ -76,12 +76,4 @@ public class PlayerTest {
         assertThat("It should set the beginning serve", testPlayer.didIServeAtBeginning(), is(true));
     }
 
-    @Test
-    public void simulatedPlayerTest() {
-        Player testPlayerOne = new Player();
-        Player testPlayerTwo = new Player();
-
-
-
-    }
 }
