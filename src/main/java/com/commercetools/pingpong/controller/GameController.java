@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+
 @RequestMapping("/game")
 public class GameController {
 
     @Autowired
     private GameService gameService;
-
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public String getPlayers(Model model) {
@@ -58,7 +58,6 @@ public class GameController {
 
         return "";
     }
-
 
     @RequestMapping(path = "/score", method = RequestMethod.POST)
     @ResponseBody
