@@ -2,8 +2,6 @@ package com.commercetools.pingpong.model;
 
 public class Player {
     private String name;
-    private int numberOfGamesWon;
-    private int totalPoints;
 
     private int setScore;
     private int matchScore;
@@ -11,9 +9,6 @@ public class Player {
     private boolean beginningServe;
 
     public Player(String name, int numberOfGamesWon, int totalPoints) {
-        this.name = name;
-        this.numberOfGamesWon = numberOfGamesWon;
-        this.totalPoints = totalPoints;
     }
 
     public Player(String name) {
@@ -62,14 +57,6 @@ public class Player {
 
     public String getName() {
         return name;
-    }
-
-    public int getNumberOfGamesWon() {
-        return numberOfGamesWon;
-    }
-
-    public int getTotalPoints() {
-        return totalPoints;
     }
 
     public int getSetScore() {
