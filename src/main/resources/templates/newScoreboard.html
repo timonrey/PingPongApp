@@ -23,7 +23,7 @@
     </div>
     <div class="footer">
         <div class="left-serve">
-            <h2 th:text="${leftServe} ? 'Your turn!' : '' "></h2>
+            <h2 th:text="${leftPlayer.amIServing()} ? 'Your turn!' : '' "></h2>
         </div>
         <div class="matchscore">
             <h2 th:text="${leftPlayer.getMatchScore()}"></h2>
@@ -31,7 +31,7 @@
             <h2 th:text="${rightPlayer.getMatchScore()}"></h2>
         </div>
         <div class="right-serve">
-            <h2 th:text="${rightServe} ? 'Your turn!' : '' "></h2>
+            <h2 th:text="${rightPlayer.amIServing()} ? 'Your turn!' : '' "></h2>
         </div>
     </div>
 </div>

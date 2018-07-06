@@ -25,9 +25,6 @@ public class GameController {
         model.addAttribute("leftPlayer", gameService.getLeftPlayer());
         model.addAttribute("rightPlayer", gameService.getRightPlayer());
 
-        model.addAttribute("leftServe", gameService.getLeftPlayerServe());
-        model.addAttribute("rightServe", gameService.getRightPlayerServe());
-
         model.addAttribute("bubbleFirstServing", gameService.getFirstServingPlayer());
         model.addAttribute("bubbleCheckOvertime", gameService.getIfItsOvertime());
 
