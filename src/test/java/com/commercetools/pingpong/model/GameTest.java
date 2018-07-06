@@ -92,8 +92,6 @@ public class GameTest {
 
     }
 
-
-    /** WARNING: If any of the following five tests fail, the above dummyPlayers methods do not work properly **/
     @Test
     public void shouldSubSetScoreOfPlayer() {
         Message testMessageOne = new Message("1", 1);

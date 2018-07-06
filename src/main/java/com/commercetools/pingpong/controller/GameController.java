@@ -11,72 +11,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-
 @RequestMapping("/game")
 public class GameController {
 
-    @Autowired
     private GameService gameService;
+
+    public GameController(@Autowired final GameService gameService) {
+        this.gameService = gameService;
+    }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public String getPlayers(Model model) {
-        model.addAttribute("rightPlayer", gameService.getRightPlayer());
         model.addAttribute("leftPlayer", gameService.getLeftPlayer());
-        model.addAttribute("bubbleMessage", getBubbleMessage());
-        model.addAttribute("leftServe", getIfLeftPlayerServes());
-        model.addAttribute("rightServe", getIfRightPlayerServes());
+        model.addAttribute("rightPlayer", gameService.getRightPlayer());
+
+        model.addAttribute("bubbleFirstServing", gameService.getFirstServingPlayer());
+        model.addAttribute("bubbleCheckOvertime", gameService.getIfItsOvertime());
+
         return "newScoreboard";
-    }
-
-
-    public String getBubbleMessage() {
-        if (gameService.getFirstServingPlayer()) {
-            return "Play for first serve!";
-
-        } else if (gameService.getIfItsOvertime()) {
-            return "Overtime!";
-        }
-        return "Play!";
-    }
-
-    public String getIfLeftPlayerServes() {
-        if (gameService.getLeftPlayerServe()) {
-            return "Serve!";
-
-        } else if (gameService.getRightPlayerServe()) {
-            return "";
-        }
-        return "";
-    }
-
-    public String getIfRightPlayerServes() {
-        if (gameService.getRightPlayerServe()) {
-            return "Serve!";
-        } else if (gameService.getLeftPlayerServe()) {
-            return "";
-        }
-
-        return "";
     }
 
     @RequestMapping(path = "/score", method = RequestMethod.POST)
     @ResponseBody
     public String updateScorePlusOne(@RequestParam(value = "player", required = false) String player, Model model) {
         gameService.updateScore(new Message(player, 1));
-        return "Score updated ";
+        return "Point scored\n";
     }
 
-    @RequestMapping(path = "/delete")
+    @RequestMapping(path = "/remove")
     @ResponseBody
     public String updateScoreDelete(@RequestParam(value = "player", required = false) String player, Model model) {
         gameService.updateScore(new Message(player, 2));
-        return "Point deleted ";
+        return "Point removed\n";
     }
 
     @RequestMapping(path = "/reset")
     @ResponseBody
     public String updateScoreReset(@RequestParam(value = "player", required = false) String player, Model model) {
         gameService.updateScore(new Message(player, 3));
-        return "Score reset ";
+        return "Score reset\n";
     }
 }
