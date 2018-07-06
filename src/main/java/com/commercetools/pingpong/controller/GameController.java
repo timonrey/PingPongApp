@@ -35,20 +35,20 @@ public class GameController {
     @ResponseBody
     public String updateScorePlusOne(@RequestParam(value = "player", required = false) String player, Model model) {
         gameService.updateScore(new Message(player, 1));
-        return "Point scored ";
+        return "Point scored\n";
     }
 
     @RequestMapping(path = "/remove")
     @ResponseBody
     public String updateScoreDelete(@RequestParam(value = "player", required = false) String player, Model model) {
         gameService.updateScore(new Message(player, 2));
-        return "Point removed ";
+        return "Point removed\n";
     }
 
     @RequestMapping(path = "/reset")
     @ResponseBody
     public String updateScoreReset(@RequestParam(value = "player", required = false) String player, Model model) {
         gameService.updateScore(new Message(player, 3));
-        return "Score reset ";
+        return "Score reset\n";
     }
 }
