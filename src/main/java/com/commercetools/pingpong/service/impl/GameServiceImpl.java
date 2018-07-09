@@ -4,9 +4,11 @@ import com.commercetools.pingpong.model.Game;
 import com.commercetools.pingpong.model.Message;
 import com.commercetools.pingpong.model.Player;
 import com.commercetools.pingpong.service.GameService;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
+@Primary
 public class GameServiceImpl implements GameService {
     private Game match;
 

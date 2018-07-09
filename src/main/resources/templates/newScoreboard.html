@@ -13,7 +13,7 @@
 <div class="page">
     <div class="message">
         <div class="bubble">
-            <h3 th:text="${bubbleMessage}"></h3>
+            <h3 th:text="${bubbleFirstServing} ? 'Play for fist serve!' : (${bubbleCheckOvertime} ? 'Overtime!' : 'Play') "></h3>
         </div>
     </div>
     <div class="setscore">
@@ -23,7 +23,7 @@
     </div>
     <div class="footer">
         <div class="left-serve">
-            <h2 th:text="${leftServe}"></h2>
+            <h2 th:text="${leftPlayer.amIServing()} ? 'Your turn!' : '' "></h2>
         </div>
         <div class="matchscore">
             <h2 th:text="${leftPlayer.getMatchScore()}"></h2>
@@ -31,16 +31,10 @@
             <h2 th:text="${rightPlayer.getMatchScore()}"></h2>
         </div>
         <div class="right-serve">
-            <h2 th:text="${rightServe}"></h2>
+            <h2 th:text="${rightPlayer.amIServing()} ? 'Your turn!' : '' "></h2>
         </div>
     </div>
 </div>
 <script th:src="@{js/score-fetcher.js}" type="application/javascript"></script>
 </body>
 </html>
-
-<!--
-<div th:if="${linea.estado} == 'SUCCESS'" class="label label-success" th:text="#{label.glineas.estado.iniciado}"></div>
-<div th:if="${linea.estado} == 'DANGER'" class="label label-danger" th:text="#{label.glineas.estado.finalizado}"></div>
-<div th:if="${linea.estado} == 'WARN'" class="label label-warning" th:text="#{label.glineas.estado.configurado}"></div>
--->
