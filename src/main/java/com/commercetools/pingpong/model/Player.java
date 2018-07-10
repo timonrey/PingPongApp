@@ -8,9 +8,6 @@ public class Player {
     private boolean serve;
     private boolean beginningServe;
 
-    public Player(String name, int numberOfGamesWon, int totalPoints) {
-    }
-
     public Player(String name) {
         this.name = name;
     }
@@ -18,24 +15,33 @@ public class Player {
     public Player() {
     }
 
-    public void addPoint() {
+    public void customizeSetScore(int newPoints) {
+        setScore = setScore + newPoints;
+    }
+
+    public void customizeMatchScore(int newPoints) {
+        matchScore = matchScore + newPoints;
+    }
+
+
+    public void addSetPoint() {
         setScore++;
     }
 
-    public void subPoint() {
+    public void subSetPoint() {
         setScore--;
     }
 
-    public void resetSet() {
+    public void addMatchPoint() {
+        matchScore++;
+    }
+
+    public void resetSetScore() {
         setScore = 0;
     }
 
-    public void setBeginningServe() {
-        beginningServe = true;
-    }
-
-    public void unsetBeginningServe() {
-        beginningServe = false;
+    public void resetMatchScore() {
+        matchScore = 0;
     }
 
     public void setServe() {
@@ -46,13 +52,15 @@ public class Player {
         serve = false;
     }
 
-    public void addMatchScore() {
-        matchScore++;
+    public void setBeginningServe() {
+        beginningServe = true;
     }
 
-    public void resetMatchScore() {
-        matchScore = 0;
+    public void unsetBeginningServe() {
+        beginningServe = false;
     }
+
+
 
 
     public String getName() {
