@@ -36,24 +36,24 @@ public class GameServiceImpl implements GameService {
 
     private Player getPlayer(Message message) {
         if (message.getButtonId().equals("1") && match.isMatchScoreEven()) {
-            return match.getPlayerOne();
+            return match.getLeftPlayer();
         } else if (message.getButtonId().equals("2") && match.isMatchScoreEven()) {
-            return match.getPlayerTwo();
+            return match.getRightPlayer();
         } else if (message.getButtonId().equals("1")) {
-            return match.getPlayerTwo();
+            return match.getRightPlayer();
         } else {
-            return match.getPlayerOne();
+            return match.getLeftPlayer();
         }
     }
 
     @Override
     public Player getLeftPlayer() {
-        return match.isMatchScoreEven() ? match.getPlayerOne() : match.getPlayerTwo();
+        return match.isMatchScoreEven() ? match.getLeftPlayer() : match.getRightPlayer();
     }
 
     @Override
     public Player getRightPlayer() {
-        return match.isMatchScoreEven() ? match.getPlayerTwo() : match.getPlayerOne();
+        return match.isMatchScoreEven() ? match.getRightPlayer() : match.getLeftPlayer();
     }
 
     @Override

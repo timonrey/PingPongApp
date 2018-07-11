@@ -1,7 +1,5 @@
 package com.commercetools.pingpong.model;
 
-import org.assertj.core.error.ShouldBe;
-import org.assertj.core.error.ShouldBeEqual;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,7 +21,7 @@ public class PlayerTest {
     @Test
     public void shouldAddSetPoint() {
         Player testPlayer = new Player();
-        testPlayer.addPoint();
+        testPlayer.addSetPoint();
 
         assertThat("It should add one SetPoint", testPlayer.getSetScore(), is(1));
     }
@@ -31,16 +29,16 @@ public class PlayerTest {
     @Test
     public void shouldAddMatchPoint() {
         Player testPlayer = new Player();
-        testPlayer.addMatchScore();
+        testPlayer.addMatchPoint();
         assertThat("It should add one MatchPoint", testPlayer.getMatchScore(), is(1));
     }
 
     @Test
     public void shouldSubSetPoint() {
         Player testPlayer = new Player();
-        testPlayer.addPoint();
-        testPlayer.addPoint();
-        testPlayer.subPoint();
+        testPlayer.addSetPoint();
+        testPlayer.addSetPoint();
+        testPlayer.subSetPoint();
 
         assertThat("Should remove one SetPoint", testPlayer.getSetScore(), is(1));
     }
@@ -48,9 +46,9 @@ public class PlayerTest {
     @Test
     public void shouldResetSetPoints() {
         Player testPlayer = new Player();
-        testPlayer.addPoint();
-        testPlayer.addPoint();
-        testPlayer.resetSet();
+        testPlayer.addSetPoint();
+        testPlayer.addSetPoint();
+        testPlayer.resetSetScore();
 
         assertThat("Should reset all SetPoints", testPlayer.getSetScore(), is(0));
     }
@@ -59,7 +57,7 @@ public class PlayerTest {
     public void shouldResetMatchPoints() {
         Player testPlayer = new Player();
 
-        testPlayer.addMatchScore();
+        testPlayer.addMatchPoint();
         testPlayer.resetMatchScore();
 
         assertThat("Should reset all MatchPoints", testPlayer.getMatchScore(), is(0));

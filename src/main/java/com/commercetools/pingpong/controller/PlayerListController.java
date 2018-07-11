@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/list")
 public class PlayerListController {
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
+    /**@RequestMapping(path = "", method = RequestMethod.GET)
     public String get(@RequestParam(value="id", required = false) String id, Model model) {
         final Player player1 = new Player("Andi", 12, 265);
         final Player player2 = new Player("Roman", 12, 264);
@@ -32,6 +32,6 @@ public class PlayerListController {
             model.addAttribute("players", players.get(playerIndex));
         }
         return "leaderboard";
-    }
+    }**/
 }
 
