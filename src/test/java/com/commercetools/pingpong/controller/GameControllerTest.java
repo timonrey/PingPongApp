@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class GameControllerTest {
 
-    @Test
+    /**@Test
     public void shouldReturnBubbleMessage() {
         Player playerTestOne = new Player("Bob");
 
@@ -21,6 +21,6 @@ public class GameControllerTest {
         Game matchTest = new Game(playerTestOne, playerTestTwo);
         GameController gameControllerTest = new GameController();
 
-    }
+    }**/
 }
 
