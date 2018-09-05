@@ -47,6 +47,11 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public Game getGame() {
+        return match;
+    }
+
+    @Override
     public Player getLeftPlayer() {
         return match.isMatchScoreEven() ? match.getPlayerOne() : match.getPlayerTwo();
     }
@@ -54,16 +59,6 @@ public class GameServiceImpl implements GameService {
     @Override
     public Player getRightPlayer() {
         return match.isMatchScoreEven() ? match.getPlayerTwo() : match.getPlayerOne();
-    }
-
-    @Override
-    public boolean getLeftPlayerServe() {
-        return match.getPlayerOneServe();
-    }
-
-    @Override
-    public boolean getRightPlayerServe() {
-        return match.getPlayerTwoServe();
     }
 
     @Override

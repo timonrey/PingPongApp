@@ -22,6 +22,7 @@ public class GameController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public String getPlayers(Model model) {
+        model.addAttribute("game", gameService.getGame());
         model.addAttribute("leftPlayer", gameService.getLeftPlayer());
         model.addAttribute("rightPlayer", gameService.getRightPlayer());
 
