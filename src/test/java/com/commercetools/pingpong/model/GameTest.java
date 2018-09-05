@@ -15,24 +15,24 @@ public class GameTest {
     public Player getLeftDummy(int setScore, int matchScore, boolean serve, boolean beginningServe) {
         Player leftDummyPlayer = new Player();
 
-        for (leftDummyPlayer.getSetScore(); leftDummyPlayer.getSetScore() < setScore;) {
-            leftDummyPlayer.addPoint();
+        for (leftDummyPlayer.gameData.getSetScore(); leftDummyPlayer.gameData.getSetScore() < setScore;) {
+            leftDummyPlayer.gameData.addPoint();
         }
 
-        for (leftDummyPlayer.getMatchScore(); leftDummyPlayer.getMatchScore() < matchScore;) {
-            leftDummyPlayer.addMatchScore();
+        for (leftDummyPlayer.gameData.getMatchScore(); leftDummyPlayer.gameData.getMatchScore() < matchScore;) {
+            leftDummyPlayer.gameData.addMatchScore();
         }
 
         if (serve) {
-            leftDummyPlayer.setServe();
+            leftDummyPlayer.gameData.setServe();
         } else {
-            leftDummyPlayer.unsetServe();
+            leftDummyPlayer.gameData.unsetServe();
         }
 
         if (beginningServe) {
-            leftDummyPlayer.setBeginningServe();
+            leftDummyPlayer.gameData.setBeginningServe();
         } else {
-            leftDummyPlayer.unsetBeginningServe();
+            leftDummyPlayer.gameData.unsetBeginningServe();
         }
 
         return leftDummyPlayer;
@@ -42,24 +42,24 @@ public class GameTest {
     public Player getRightDummy(int setScore, int matchScore, boolean serve, boolean beginningServe) {
         Player rightDummyPlayer = new Player();
 
-        for (rightDummyPlayer.getSetScore(); rightDummyPlayer.getSetScore() < setScore;) {
-            rightDummyPlayer.addPoint();
+        for (rightDummyPlayer.gameData.getSetScore(); rightDummyPlayer.gameData.getSetScore() < setScore;) {
+            rightDummyPlayer.gameData.addPoint();
         }
 
-        for (rightDummyPlayer.getMatchScore(); rightDummyPlayer.getMatchScore() < matchScore;) {
-            rightDummyPlayer.addMatchScore();
+        for (rightDummyPlayer.gameData.getMatchScore(); rightDummyPlayer.gameData.getMatchScore() < matchScore;) {
+            rightDummyPlayer.gameData.addMatchScore();
         }
 
         if (serve) {
-            rightDummyPlayer.setServe();
+            rightDummyPlayer.gameData.setServe();
         } else {
-            rightDummyPlayer.unsetServe();
+            rightDummyPlayer.gameData.unsetServe();
         }
 
         if (beginningServe) {
-            rightDummyPlayer.setBeginningServe();
+            rightDummyPlayer.gameData.setBeginningServe();
         } else {
-            rightDummyPlayer.unsetBeginningServe();
+            rightDummyPlayer.gameData.unsetBeginningServe();
         }
 
         return rightDummyPlayer;
@@ -75,8 +75,8 @@ public class GameTest {
 
         Game testGame = new Game(leftTestPlayer, rightTestPlayer);
 
-        assertThat("It should return the name of the leftPlayer", testGame.getPlayerOne().getName(), is("Hugo"));
-        assertThat("It should return the name of the rightPlayer", testGame.getPlayerTwo().getName(), is("Boss"));
+        assertThat("It should return the name of the leftPlayer", testGame.getPlayerOne().gameData.getName(), is("Hugo"));
+        assertThat("It should return the name of the rightPlayer", testGame.getPlayerTwo().gameData.getName(), is("Boss"));
 
     }
 
@@ -88,7 +88,7 @@ public class GameTest {
 
         testMatch.updateScoreOfPlayer(testplayer, testMessage.getActionType());
 
-        assertThat("The actionType 1 should cause the active player to receive a setpoint", testplayer.getSetScore(), is(1));
+        assertThat("The actionType 1 should cause the active player to receive a setpoint", testplayer.gameData.getSetScore(), is(1));
 
     }
 
@@ -103,7 +103,7 @@ public class GameTest {
         testMatch.updateScoreOfPlayer(testplayer, testMessageOne.getActionType());
         testMatch.updateScoreOfPlayer(testplayer, testMesssageTwo.getActionType());
 
-        assertThat("It should remove one setpoint only for the acting player", testplayer.getSetScore(), is(1));
+        assertThat("It should remove one setpoint only for the acting player", testplayer.gameData.getSetScore(), is(1));
 
     }
 
@@ -111,7 +111,7 @@ public class GameTest {
     public void shouldAddMatchPointOfLeftPlayer() {
         Game testMatch = new Game(getLeftDummy(11, 0, true, false), getRightDummy(7, 0, false, true));
         testMatch.updateMatchScoreOfPlayers();
-        assertThat("It should remove one matchpoint only for the left player", testMatch.getPlayerOne().getMatchScore(), is(1));
+        assertThat("It should remove one matchpoint only for the left player", testMatch.getPlayerOne().gameData.getMatchScore(), is(1));
 
     }
 
@@ -119,7 +119,7 @@ public class GameTest {
     public void shouldAddMatchPointOfRightPlayer() {
         Game testMatch = new Game(getLeftDummy(7, 0, false, true), getRightDummy(11, 0, true, false));
         testMatch.updateMatchScoreOfPlayers();
-        assertThat("It should remove one matchpoint only for the right player", testMatch.getPlayerTwo().getMatchScore(), is(1));
+        assertThat("It should remove one matchpoint only for the right player", testMatch.getPlayerTwo().gameData.getMatchScore(), is(1));
 
     }
 
@@ -137,11 +137,11 @@ public class GameTest {
         Game testMatch = new Game(getLeftDummy(0,0,false,false), getRightDummy(0,0,false,false));
         testMatch.changeBeginningServingPlayer(testMatch.getPlayerOne(),testMatch.getPlayerTwo());
 
-        assertThat("It should set the very first serve for the leftPlayer into true", testMatch.getPlayerOne().didIServeAtBeginning(), is(true));
-        assertThat("It should set the very first serve for the rightPlayer into true", testMatch.getPlayerTwo().didIServeAtBeginning(), is(false));
+        assertThat("It should set the very first serve for the leftPlayer into true", testMatch.getPlayerOne().gameData.didIServeAtBeginning(), is(true));
+        assertThat("It should set the very first serve for the rightPlayer into true", testMatch.getPlayerTwo().gameData.didIServeAtBeginning(), is(false));
 
-        assertThat("It should set the normal serve value of the leftPlayer into the same value like above", testMatch.getPlayerOne().amIServing(), is(true));
-        assertThat("It should set the normal serve value of the rightPlayer into the same value like above", testMatch.getPlayerTwo().amIServing(), is(false));
+        assertThat("It should set the normal serve value of the leftPlayer into the same value like above", testMatch.getPlayerOne().gameData.amIServing(), is(true));
+        assertThat("It should set the normal serve value of the rightPlayer into the same value like above", testMatch.getPlayerTwo().gameData.amIServing(), is(false));
     }
 
     @Test
@@ -151,10 +151,10 @@ public class GameTest {
 
         testMatch.updateScoreOfPlayer(testMatch.getPlayerOne(), testMessage.getActionType());
 
-        assertThat("", testMatch.getPlayerOne().getSetScore(), is(0));
-        assertThat("", testMatch.getPlayerOne().getMatchScore(), is(0));
-        assertThat("", testMatch.getPlayerOne().amIServing(), is(false));
-        assertThat("", testMatch.getPlayerOne().didIServeAtBeginning(), is(false));
+        assertThat("", testMatch.getPlayerOne().gameData.getSetScore(), is(0));
+        assertThat("", testMatch.getPlayerOne().gameData.getMatchScore(), is(0));
+        assertThat("", testMatch.getPlayerOne().gameData.amIServing(), is(false));
+        assertThat("", testMatch.getPlayerOne().gameData.didIServeAtBeginning(), is(false));
         // After the reset, variables of the leftPlayer should be default
 
     }
@@ -166,10 +166,10 @@ public class GameTest {
 
         testMatch.updateScoreOfPlayer(testMatch.getPlayerTwo(), testMessage.getActionType());
 
-        assertThat("", testMatch.getPlayerTwo().getSetScore(), is(0));
-        assertThat("", testMatch.getPlayerTwo().getMatchScore(), is(0));
-        assertThat("", testMatch.getPlayerTwo().amIServing(), is(false));
-        assertThat("", testMatch.getPlayerTwo().didIServeAtBeginning(), is(false));
+        assertThat("", testMatch.getPlayerTwo().gameData.getSetScore(), is(0));
+        assertThat("", testMatch.getPlayerTwo().gameData.getMatchScore(), is(0));
+        assertThat("", testMatch.getPlayerTwo().gameData.amIServing(), is(false));
+        assertThat("", testMatch.getPlayerTwo().gameData.didIServeAtBeginning(), is(false));
         // After the reset, variables of the rightPlayer should be default
 
     }
@@ -179,15 +179,15 @@ public class GameTest {
         Game testMatch = new Game(getLeftDummy(11,1,true,true), getRightDummy(6,1,false,false));
         testMatch.gameOver();
 
-        assertThat("", testMatch.getPlayerOne().getSetScore(), is(0));
-        assertThat("", testMatch.getPlayerOne().getMatchScore(), is(0));
-        assertThat("", testMatch.getPlayerOne().amIServing(), is(false));
-        assertThat("", testMatch.getPlayerOne().didIServeAtBeginning(), is(false));
+        assertThat("", testMatch.getPlayerOne().gameData.getSetScore(), is(0));
+        assertThat("", testMatch.getPlayerOne().gameData.getMatchScore(), is(0));
+        assertThat("", testMatch.getPlayerOne().gameData.amIServing(), is(false));
+        assertThat("", testMatch.getPlayerOne().gameData.didIServeAtBeginning(), is(false));
 
-        assertThat("", testMatch.getPlayerTwo().getSetScore(), is(0));
-        assertThat("", testMatch.getPlayerTwo().getMatchScore(), is(0));
-        assertThat("", testMatch.getPlayerTwo().amIServing(), is(false));
-        assertThat("", testMatch.getPlayerTwo().didIServeAtBeginning(), is(false));
+        assertThat("", testMatch.getPlayerTwo().gameData.getSetScore(), is(0));
+        assertThat("", testMatch.getPlayerTwo().gameData.getMatchScore(), is(0));
+        assertThat("", testMatch.getPlayerTwo().gameData.amIServing(), is(false));
+        assertThat("", testMatch.getPlayerTwo().gameData.didIServeAtBeginning(), is(false));
         // After a game ends, each value should be reset automatically
     }
 
@@ -204,8 +204,8 @@ public class GameTest {
         Game scenarioOne = new Game(getLeftDummy(8,0,true,true), getRightDummy(6,0,false,false));
         scenarioOne.whoServesAfterDoubleClick();
 
-        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioOne.getPlayerOne().amIServing(), is(true));
-        assertThat("It should find out if the rightPlayer is serving after a setPoint was removed", scenarioOne.getPlayerTwo().amIServing(), is(false));
+        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioOne.getPlayerOne().gameData.amIServing(), is(true));
+        assertThat("It should find out if the rightPlayer is serving after a setPoint was removed", scenarioOne.getPlayerTwo().gameData.amIServing(), is(false));
     }
 
     @Test
@@ -213,8 +213,8 @@ public class GameTest {
         Game scenarioTwo = new Game(getLeftDummy(7,0,true,true), getRightDummy(6,0,false,false));
         scenarioTwo.whoServesAfterDoubleClick();
 
-        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioTwo.getPlayerOne().amIServing(), is(false));
-        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioTwo.getPlayerTwo().amIServing(), is(true));
+        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioTwo.getPlayerOne().gameData.amIServing(), is(false));
+        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioTwo.getPlayerTwo().gameData.amIServing(), is(true));
     }
 
     @Test
@@ -222,8 +222,8 @@ public class GameTest {
         Game scenarioThree = new Game(getLeftDummy(7,0,false,true), getRightDummy(6,0,true,false));
         scenarioThree.whoServesAfterDoubleClick();
 
-        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioThree.getPlayerOne().amIServing(), is(true));
-        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioThree.getPlayerTwo().amIServing(), is(false));
+        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioThree.getPlayerOne().gameData.amIServing(), is(true));
+        assertThat("It should find out if the leftPlayer is serving after a setPoint was removed", scenarioThree.getPlayerTwo().gameData.amIServing(), is(false));
     }
 
     @Test
@@ -231,8 +231,8 @@ public class GameTest {
         Game testMatch = new Game(getLeftDummy(0,0,false,false), getRightDummy(0,0,false,false));
         testMatch.setFirstServe(testMatch.getPlayerOne());
 
-        assertThat("", testMatch.getPlayerOne().didIServeAtBeginning(), is(true));
-        assertThat("", testMatch.getPlayerOne().amIServing(), is(true));
+        assertThat("", testMatch.getPlayerOne().gameData.didIServeAtBeginning(), is(true));
+        assertThat("", testMatch.getPlayerOne().gameData.amIServing(), is(true));
         // After a button was pressed the first time in a game, the acting player should change both serving values into 'true'
     }
 
@@ -241,11 +241,11 @@ public class GameTest {
         Game scenarioOne = new Game(getLeftDummy(0,1,false,false), getRightDummy(0,1,true,true));
         scenarioOne.whoBeginsServing();
 
-        assertThat("", scenarioOne.getPlayerOne().amIServing(), is(true));
-        assertThat("", scenarioOne.getPlayerOne().didIServeAtBeginning(), is(true));
+        assertThat("", scenarioOne.getPlayerOne().gameData.amIServing(), is(true));
+        assertThat("", scenarioOne.getPlayerOne().gameData.didIServeAtBeginning(), is(true));
 
-        assertThat("", scenarioOne.getPlayerTwo().amIServing(), is(false));
-        assertThat("", scenarioOne.getPlayerTwo().didIServeAtBeginning(), is(false));
+        assertThat("", scenarioOne.getPlayerTwo().gameData.amIServing(), is(false));
+        assertThat("", scenarioOne.getPlayerTwo().gameData.didIServeAtBeginning(), is(false));
         // After a match was played, the method should decide who will start the next match and set all serving values into the correct boolean
         // CASE: the beginningServe of the rightPlayer is 'true'
     }
@@ -255,11 +255,11 @@ public class GameTest {
         Game scenarioTwo = new Game(getLeftDummy(0,1,true,true), getRightDummy(0,1,false,false));
         scenarioTwo.whoBeginsServing();
 
-        assertThat("", scenarioTwo.getPlayerOne().amIServing(), is(false));
-        assertThat("", scenarioTwo.getPlayerOne().didIServeAtBeginning(), is(false));
+        assertThat("", scenarioTwo.getPlayerOne().gameData.amIServing(), is(false));
+        assertThat("", scenarioTwo.getPlayerOne().gameData.didIServeAtBeginning(), is(false));
 
-        assertThat("", scenarioTwo.getPlayerTwo().amIServing(), is(true));
-        assertThat("", scenarioTwo.getPlayerTwo().didIServeAtBeginning(), is(true));
+        assertThat("", scenarioTwo.getPlayerTwo().gameData.amIServing(), is(true));
+        assertThat("", scenarioTwo.getPlayerTwo().gameData.didIServeAtBeginning(), is(true));
         // After a match was played, the method should decide who will start the next match and set all serving values into the correct boolean
         // CASE: the beginningServe of the leftPlayer is 'true'
     }
