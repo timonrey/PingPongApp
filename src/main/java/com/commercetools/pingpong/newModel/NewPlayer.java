@@ -5,8 +5,6 @@ import com.commercetools.pingpong.model.Player;
 public class NewPlayer {
 
     public String name;
-    public NewMatch currentMatch;
-    public NewGame currentGame;
 
 
     public NewPlayer(String playerName) {

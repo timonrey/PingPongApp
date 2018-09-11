@@ -1,80 +1,105 @@
 package com.commercetools.pingpong.newModel;
 
+
 public class NewMatch {
 
     private NewPlayer playerOne;
     private NewPlayer playerTwo;
 
-    private int matchPoints;
-    private boolean beginningServe;
+    private int points[] = new int[2];
+    private NewGame games[] = new NewGame[3];
+
+    private NewPlayer beginningPlayer;
 
     public NewMatch(NewPlayer playerOne, NewPlayer playerTwo) {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
+        this.points[0] = 0;
+        this.points[1] = 0;
     }
 
-    public void createNewGame() {
-        NewGame game = new NewGame(playerOne, playerTwo);
+    public NewGame getCurrentGame() {
+        return this.games[getNumberOfGames() - 1];
     }
 
-    public int getNumberOfMatches() {
-        int gamesPlayed = playerOne.currentMatch.getMatchPoints() + playerTwo.currentMatch.getMatchPoints();
-
-        return gamesPlayed;
+    public int getNumberOfGames() {
+        int gamesCount = 0;
+        for (int i = 0; i < this.games.length; i++) {
+            if (this.games[i] != null) {
+                gamesCount++;
+            }
+        }
+        return gamesCount;
     }
 
-    public boolean getMatchStatus() {
-        boolean matchOver;
+    public void start(NewPlayer beginner) {
+        this.beginningPlayer = beginner;
+        this.games[0] = this.createNewGame(this.playerOne == this.beginningPlayer);
+    }
 
-        if(getGameMod() == 3) {
+    public void addGamePoint(NewPlayer actingPlayer) {
+        NewGame currentGame = getCurrentGame();
+        currentGame.addSetPoint(actingPlayer);
 
-            if (getNumberOfMatches() == 3) {
-                return matchOver = true;
+        if(currentGame.getIsGameIsOver()) {
+            NewPlayer winner = currentGame.getWinner();
+            this.addMatchPoint(winner);
 
-            } else {
-                return matchOver = false;
+            if(this.isMatchOver()) {
+                return;
             }
 
-        } else {
-            return false;
+            this.games[getNumberOfGames()] = this.createNewGame(currentGame.getBeginningPlayer() == this.playerOne);
+
         }
     }
 
-    public int getGameMod() {
-        int bestOfThree = 3;
+    public void addMatchPoint(NewPlayer winner) {
+        if(winner == this.playerOne) {
+            this.points[0]++;
 
-        return bestOfThree;
+        } else {
+            this.points[1]++;
+        }
+    }
+
+    public void subtractGamePoint(NewPlayer actingPlayer) {
+        getCurrentGame().subtractSetPoint(actingPlayer);
+    }
+
+    public void resetGamePoint() {
+        getCurrentGame().resetGame();
+    }
+
+    public boolean isMatchOver() {
+        return this.points[0] == 2 || this.points[1] == 2;
+    }
+
+    public NewPlayer getWinner() {
+        if (this.isMatchOver()) {
+            return this.points[0] == 2 ? this.playerOne : this.playerTwo;
+        }
+        return null;
     }
 
 
-    public void addMatchPoint() {
-        matchPoints++;
+
+    public int[] getMatchPoints() {
+        return this.points;
     }
 
-    public void removeMatchPoint() {
-        matchPoints--;
+    public void __setCustomMatchScore(int p1, int p2) {
+        this.points[0] = p1;
+        this.points[1] = p2;
     }
 
-    public void setBeginningServe() {
-        beginningServe = true;
+    private NewGame createNewGame(boolean isPlayerOneBeginning) {
+        NewGame game = new NewGame(this.playerOne, this.playerTwo, isPlayerOneBeginning);
+        return game;
     }
 
-    public void unsetBeginningServe() {
-        beginningServe = false;
-    }
-
-    public void resetAllData() {
-        matchPoints = 0;
-        beginningServe = false;
-    }
-
-
-    public int getMatchPoints() {
-        return matchPoints;
-    }
-
-    public boolean didIServeAtBeginning() {
-        return beginningServe;
+    public boolean isPlayerOneOnTheLeftSide() {
+        return getNumberOfGames() % 2 == 1;
     }
 
 }

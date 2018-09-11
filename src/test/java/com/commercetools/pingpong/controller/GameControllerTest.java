@@ -3,6 +3,7 @@ package com.commercetools.pingpong.controller;
 import com.commercetools.pingpong.model.Game;
 import com.commercetools.pingpong.model.Player;
 
+import com.commercetools.pingpong.service.GameService;
 import org.junit.Test;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +20,7 @@ public class GameControllerTest {
         Player playerTestTwo = new Player("Kelso");
 
         Game matchTest = new Game(playerTestOne, playerTestTwo);
-        GameController gameControllerTest = new GameController();
+        //GameController gameControllerTest = new GameController();
 
     }
 }
