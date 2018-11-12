@@ -1,7 +1,8 @@
 package com.commercetools.pingpong.service.impl;
 
-import com.commercetools.pingpong.model.Game;
 import com.commercetools.pingpong.model.Message;
+import com.commercetools.pingpong.model.Game;
+import com.commercetools.pingpong.model.Match;
 import com.commercetools.pingpong.model.Player;
 import com.commercetools.pingpong.service.GameService;
 import org.springframework.context.annotation.Primary;
@@ -10,16 +11,51 @@ import org.springframework.stereotype.Component;
 @Component
 @Primary
 public class GameServiceImpl implements GameService {
-    private Game match;
+    private Match match;
+
+    Player playerOne;
+    Player playerTwo;
 
     public GameServiceImpl() {
-        match = new Game(new Player("HeshamOne"), new Player("HeshamTwo"));
-    }
-    // FIXME: These hardcoded values will be removed later
+        this.playerOne = new Player("Nicola");
+        this.playerTwo = new Player("Timon");
 
-    @Override
+        match = new Match(this.playerOne, this.playerTwo);
+    }
+
+    public void killMatch() {
+        match = new Match(this.playerOne, this.playerTwo);
+    }
+
     public void updateScore(Message message) {
         Player actingPlayer = getPlayer(message);
+        if (message.getActionType() == 1) {
+            addScore(actingPlayer);
+
+        } else if (message.getActionType() == 2) {
+            removeScore(actingPlayer);
+
+        } else if (message.getActionType() == 3) {
+            resetScore();
+
+        } else {
+            throw new Error("Expected ActionType to be 1, 2 or 3. Got instead: " + message.getActionType());
+        }
+    }
+
+
+// todo: Check if match is over and do something else
+
+    public void addScore(Player actingPlayer) {
+        if (match.getNumberOfGames() == 0) {
+            match.start(actingPlayer);
+
+        } else {
+            match.addGamePoint(actingPlayer);
+        }
+
+
+        /*
         if (match.areBothSetScoresZero() && !match.isSomeoneServing()) {
             match.setFirstServe(actingPlayer);
         } else {
@@ -31,50 +67,45 @@ public class GameServiceImpl implements GameService {
             }
 
         }
+ */
+    }
 
+    public void removeScore(Player actingPlayer) {
+        if (match.getNumberOfGames() != 0) {
+            match.subtractGamePoint(actingPlayer);
+        }
+    }
+
+    public void resetScore() {
+        if (match.getNumberOfGames() != 0) {
+            match.resetGamePoint();
+        }
     }
 
     private Player getPlayer(Message message) {
-        if (message.getButtonId().equals("1") && match.isMatchScoreEven()) {
-            return match.getPlayerOne();
-        } else if (message.getButtonId().equals("2") && match.isMatchScoreEven()) {
-            return match.getPlayerTwo();
+        if (message.getButtonId().equals("1") && match.isPlayerOneOnTheLeftSide()) {
+            return this.playerOne;
+        } else if (message.getButtonId().equals("2") && match.isPlayerOneOnTheLeftSide()) {
+            return this.playerTwo;
         } else if (message.getButtonId().equals("1")) {
-            return match.getPlayerTwo();
+            return this.playerTwo;
         } else {
-            return match.getPlayerOne();
+            return this.playerOne;
         }
     }
 
     @Override
-    public Player getLeftPlayer() {
-        return match.isMatchScoreEven() ? match.getPlayerOne() : match.getPlayerTwo();
+    public Game getGame() {
+        return match.getCurrentGame();
     }
 
     @Override
-    public Player getRightPlayer() {
-        return match.isMatchScoreEven() ? match.getPlayerTwo() : match.getPlayerOne();
+    public Match getMatch() {
+        return  match;
     }
 
     @Override
-    public boolean getLeftPlayerServe() {
-        return match.getPlayerOneServe();
-    }
-
-    @Override
-    public boolean getRightPlayerServe() {
-        return match.getPlayerTwoServe();
-    }
-
-    @Override
-    public boolean getIfItsOvertime() {
-        return match.isOvertime(getLeftPlayer(), getRightPlayer());
-    }
-
-    @Override
-    public boolean getFirstServingPlayer() {
-        return !match.isSomeoneServing();
+    public boolean hasMatchStarted() {
+        return match.getNumberOfGames() != 0;
     }
 }
-
-// {"button" : "1", "actionType": "1"}

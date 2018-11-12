@@ -1,193 +1,97 @@
 package com.commercetools.pingpong.model;
 
-
 public class Game {
+
     private Player playerOne;
     private Player playerTwo;
+    private boolean isPlayerOneBeginning;
+    private Player servingPlayer;
 
-    public Game(Player firstPlayer, Player secondPlayer) {
-        playerOne = firstPlayer;
-        playerTwo = secondPlayer;
+    private int score[] = new int[2];
+
+    public Game(Player playerOne, Player playerTwo, boolean isPlayerOneBeginning) {
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+        this.isPlayerOneBeginning = isPlayerOneBeginning;
+
+        // Ensure that the game state is initialized
+        this.resetGame();
     }
 
-    public void updateScoreOfPlayer(Player player, int actionType) {
-
-        if (actionType == 1 && !hasSomebodyWonSet()) {
-            player.addPoint();
-            decideWhoServes();
-
-        } else if (actionType == 2 && player.getSetScore() > 0) {
-            player.subPoint();
-            whoServesAfterDoubleClick();
-
-        } else if (actionType == 3) {
-            resetSetScores();
-            resetMatchScores();
-            resetServe();
-            resetBeginningServe();
-
-        }
-
+    public int[] getScore() {
+        return this.score;
     }
 
-    public void updateMatchScoreOfPlayers() {
-        if (hasPlayerWonSet(playerOne, playerTwo) && !isMatchOver()) {
-            playerOne.addMatchScore();
-            resetSetScores();
-            whoBeginsServing();
-
-        } else if (hasPlayerWonSet(playerTwo, playerOne) && !isMatchOver()) {
-            playerTwo.addMatchScore();
-            resetSetScores();
-            whoBeginsServing();
-        }
-    }
-
-    public void gameOver() {
-        resetSetScores();
-        resetMatchScores();
-        resetServe();
-        resetBeginningServe();
-
-    }
-
-    public boolean hasSomebodyWonSet() {
-        return (hasPlayerWonSet(playerOne, playerTwo) || hasPlayerWonSet(playerTwo, playerOne));
-    }
-
-    public boolean hasPlayerWonSet(Player playerWhoIsWinning, Player playerWhoIsLoosing) {
-        if (playerWhoIsWinning.getSetScore() == 11 && playerWhoIsLoosing.getSetScore() < 10) {
-            return true;
-
-        } else if (playerWhoIsWinning.getSetScore() >= 11 && playerWhoIsLoosing.getSetScore() >= 10) {
-            return isTwoPointDifference(playerWhoIsWinning, playerWhoIsLoosing);
+    public void addSetPoint(Boolean playerOne) {
+        if(playerOne) {
+            this.score[0]++;
 
         } else {
-            return false;
+            this.score[1]++;
         }
-    }
- 
-    public boolean isMatchOver() {
-        return (playerOne.getMatchScore() == 2 || playerTwo.getMatchScore() == 2);
+        switchServingPlayer(true);
     }
 
-    public boolean isTwoPointDifference(Player winningPlayer, Player losingPlayer) {
-        return (winningPlayer.getSetScore() - losingPlayer.getSetScore() == 2);
-    }
-
-    public void resetSetScores() {
-        playerOne.resetSet();
-        playerTwo.resetSet();
-    }
-
-    public void resetMatchScores() {
-        playerOne.resetMatchScore();
-        playerTwo.resetMatchScore();
-    }
-
-    public void resetServe() {
-        playerOne.unsetServe();
-        playerTwo.unsetServe();
-    }
-
-    public void resetBeginningServe() {
-        playerOne.unsetBeginningServe();
-        playerTwo.unsetBeginningServe();
-    }
-
-    public boolean areBothSetScoresZero() {
-        return (playerOne.getSetScore() == 0 && playerTwo.getSetScore() == 0);
-    }
-
-    public boolean areBothMatchScoresZero() {
-        return (playerOne.getMatchScore() == 0 && playerTwo.getMatchScore() == 0);
-    }
-
-    public boolean isSomeoneServing() {
-        return (playerOne.amIServing() || playerTwo.amIServing());
-    }
-
-    public boolean isSetScoreEven() {
-        return ((playerOne.getSetScore() + playerTwo.getSetScore()) % 2 == 0);
-    }
-
-    public boolean isMatchScoreEven() {
-        return ((playerOne.getMatchScore() + playerTwo.getMatchScore()) % 2 == 0);
-    }
-
-    public Player getPlayerOne() {
-        return playerOne;
-    }
-
-    public Player getPlayerTwo() {
-        return playerTwo;
-    }
-
-    public boolean getPlayerOneServe() {
-        return playerOne.amIServing();
-    }
-
-    public boolean getPlayerTwoServe() {
-        return playerTwo.amIServing();
-    }
-
-    public void changeServingPlayer(Player nextServingPlayer, Player lastServingPlayer) {
-        lastServingPlayer.unsetServe();
-        nextServingPlayer.setServe();
-    }
-
-    public void changeBeginningServingPlayer(Player nextServingPlayer, Player lastServingPlayer) {
-        lastServingPlayer.unsetBeginningServe();
-        nextServingPlayer.setBeginningServe();
-        lastServingPlayer.unsetServe();
-        nextServingPlayer.setServe();
-    }
-
-    public boolean isOvertime(Player playerOne, Player playerTwo) {
-        return playerOne.getSetScore() >= 10 && playerTwo.getSetScore() >= 10;
-    }
-
-    public void whoServesAfterDoubleClick() {
-        if (!isSetScoreEven()) {
-            if (playerOne.amIServing()) {
-                changeServingPlayer(playerTwo, playerOne);
-
-            } else if (playerTwo.amIServing()) {
-                changeServingPlayer(playerOne, playerTwo);
+    public void subtractSetPoint(Player player) {
+        if(player == this.playerOne) {
+            if(this.score[0] > 0) {
+                this.score[0]--;
             }
+
+        } else if(player == this.playerTwo) {
+            if(this.score[1] > 0)
+
+                this.score[1]--;
+        } else {
+            throw new Error("Player did not match playerOne or playerTwo");
         }
-    }
-
-    public void setFirstServe(Player actingPlayer) {
-        actingPlayer.setBeginningServe();
-        actingPlayer.setServe();
+        switchServingPlayer(false);
     }
 
 
-    public void whoBeginsServing() {
-        if (playerOne.didIServeAtBeginning()) {
-            changeBeginningServingPlayer(playerTwo, playerOne);
-
-        } else if (playerTwo.didIServeAtBeginning()) {
-            changeBeginningServingPlayer(playerOne, playerTwo);
-        }
-    }
-
-    public void decideWhoServes() {
-        if (areBothSetScoresZero() && areBothMatchScoresZero()) {
+    // Check if the new score is an odd or even number, in which case we need to switch the serving player.
+    public void switchServingPlayer(boolean isEven) {
+        if(this.getIsOvertime()) {
+            this.servingPlayer = this.servingPlayer == this.playerOne ? this.playerTwo : this.playerOne;
             return;
+        }
 
-        } else if (isOvertime(playerOne, playerTwo) && playerOne.amIServing()) {
-            changeServingPlayer(playerTwo, playerOne);
-
-        } else if (isOvertime(playerOne, playerTwo) && playerTwo.amIServing()) {
-            changeServingPlayer(playerOne, playerTwo);
-
-        } else if (playerOne.amIServing() && isSetScoreEven()) {
-            changeServingPlayer(playerTwo, playerOne);
-
-        } else if (playerTwo.amIServing() && isSetScoreEven()) {
-            changeServingPlayer(playerOne, playerTwo);
+        int condition = isEven ? 0 : 1;
+        int scoreSum = this.score[0] + this.score[1];
+        int rest = scoreSum % 2;
+        if (rest == condition) {
+            this.servingPlayer = this.servingPlayer == this.playerOne ? this.playerTwo : this.playerOne;
         }
     }
+
+    public boolean getIsOvertime() {
+        return (this.score[0] >= 10 && this.score[1] >= 10);
+    }
+
+    public void resetGame() {
+        this.score[0] = 0;
+        this.score[1] = 0;
+        this.servingPlayer = this.isPlayerOneBeginning ? this.playerOne : this.playerTwo;
+    }
+
+    public Player getServingPlayer() {
+        return this.servingPlayer;
+    }
+
+    public boolean getIfGameIsOver() {
+        if (this.score[0] >= 11 || this.score[1] >= 11) {
+            return Math.abs(this.score[0] - this.score[1]) >= 2;
+        }
+        return false;
+    }
+
+    public void __setCustomScore (int p1, int p2) {
+        this.score[0] = p1;
+        this.score[1] = p2;
+    }
+
+    public Player getBeginningPlayer() {
+        return isPlayerOneBeginning ? this.playerOne : this.playerTwo;
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.commercetools.pingpong.newModel;
 
 
+import com.commercetools.pingpong.model.Game;
+import com.commercetools.pingpong.model.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,196 +12,196 @@ import static org.junit.Assert.assertThat;
 
 public class NewGameTest {
 
-    private NewPlayer testPlayerOne;
-    private NewPlayer testPlayerTwo;
-    private NewGame newGame;
+    private Player testPlayerOne;
+    private Player testPlayerTwo;
+    private Game game;
 
     @Before
     public void setup() {
-        testPlayerOne = new NewPlayer("Nicola");
-        testPlayerTwo = new NewPlayer("Timon");
-        newGame = new NewGame(this.testPlayerOne, this.testPlayerTwo, true);
+        testPlayerOne = new Player("Nicola");
+        testPlayerTwo = new Player("Timon");
+        game = new Game(this.testPlayerOne, this.testPlayerTwo, true);
     }
 
 
     @Test
     public void shouldReturnEmptyArray() {
         int[] expectedInitialScore = {0,0};
-        assertThat("Should give default value of score as 0,0 at position 0,1", newGame.getScore(), is(expectedInitialScore));
+        assertThat("Should give default value of score as 0,0 at position 0,1", game.getScore(), is(expectedInitialScore));
     }
 
     @Test
     public void shouldAddSetPoint() {
-        newGame.addSetPoint(this.testPlayerOne);
-        assertThat("Should set score of testPlayerOne as 1 at position 0", newGame.getScore()[0], is(1));
+        game.addSetPoint(this.testPlayerOne);
+        assertThat("Should set score of testPlayerOne as 1 at position 0", game.getScore()[0], is(1));
     }
 
     @Test
     public void shouldSubtractPointCaseOne() {
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.subtractSetPoint(this.testPlayerOne);
-        assertThat("Should set score of testPlayerOne from 2 to 1 at position 0", newGame.getScore()[0], is(1));
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.subtractSetPoint(this.testPlayerOne);
+        assertThat("Should set score of testPlayerOne from 2 to 1 at position 0", game.getScore()[0], is(1));
     }
 
     @Test
     public void shouldSubtractPointCaseTwo() {
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.subtractSetPoint(this.testPlayerOne);
-        newGame.subtractSetPoint(this.testPlayerOne);
-        newGame.subtractSetPoint(this.testPlayerOne);
-        assertThat("Should not subtract score below 0", newGame.getScore()[0], is(0));
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.subtractSetPoint(this.testPlayerOne);
+        game.subtractSetPoint(this.testPlayerOne);
+        game.subtractSetPoint(this.testPlayerOne);
+        assertThat("Should not subtract score below 0", game.getScore()[0], is(0));
     }
 
     @Test
     public void shouldResetGamePartOne() {
-        newGame.__setCustomScore(5, 7);
-        newGame.resetGame();
-        assertThat("Should reset score to null", newGame.getScore()[0], is(0));
+        game.__setCustomScore(5, 7);
+        game.resetGame();
+        assertThat("Should reset score to null", game.getScore()[0], is(0));
     }
 
     @Test
     public void shouldSetServingPlayerInitially() {
-        assertThat("Should set servingPlayer to playerOne based on isPlayerOneBeginning", newGame.getServingPlayer(), is(this.testPlayerOne));
+        assertThat("Should set servingPlayer to playerOne based on isPlayerOneBeginning", game.getServingPlayer(), is(this.testPlayerOne));
     }
 
     @Test
     public void shouldChangeServingPlayerAfterTwoServes() {
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        assertThat("Should change servingPlayer after two serves from playerOne to playerTwo", newGame.getServingPlayer(), is(this.testPlayerTwo));
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        assertThat("Should change servingPlayer after two serves from playerOne to playerTwo", game.getServingPlayer(), is(this.testPlayerTwo));
     }
 
     @Test
     public void shouldNotChangeServingPlayer() {
-        newGame.addSetPoint(this.testPlayerOne);
-        assertThat("Should not change servingPlayer if the score is not even", newGame.getServingPlayer(), is(this.testPlayerOne));
+        game.addSetPoint(this.testPlayerOne);
+        assertThat("Should not change servingPlayer if the score is not even", game.getServingPlayer(), is(this.testPlayerOne));
     }
 
     @Test
     public void shouldChangeServingPlayerBackToPlayerOne() {
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
         // --> here it will switch to player two
-        newGame.subtractSetPoint(this.testPlayerOne);
-        assertThat("Should change the servingPlayer back to playerOne after it switched to playerTwo and a point was subtracted", newGame.getServingPlayer(), is(this.testPlayerOne));
+        game.subtractSetPoint(this.testPlayerOne);
+        assertThat("Should change the servingPlayer back to playerOne after it switched to playerTwo and a point was subtracted", game.getServingPlayer(), is(this.testPlayerOne));
     }
 
 
     @Test
     public void shouldResetGame() {
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.resetGame();
-        assertThat("Should reset servingPlayer to playerOne based on isPlayerOneBeginning", newGame.getServingPlayer(), is(this.testPlayerOne));
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerOne);
+        game.resetGame();
+        assertThat("Should reset servingPlayer to playerOne based on isPlayerOneBeginning", game.getServingPlayer(), is(this.testPlayerOne));
     }
 
     @Test
     public void shouldCheckIfThereIsOvertime() {
-        assertThat("Game is not in overtime", newGame.getIsOvertime(), is(false));
+        assertThat("Game is not in overtime", game.getIsOvertime(), is(false));
     }
 
     @Test
     public void shouldCheckIfThereIsOvertimePartTwo() {
-        newGame.__setCustomScore(9, 9);
-        assertThat("Game is not in overtime on 9:9", newGame.getIsOvertime(), is(false));
+        game.__setCustomScore(9, 9);
+        assertThat("Game is not in overtime on 9:9", game.getIsOvertime(), is(false));
 
-        newGame.__setCustomScore(10, 9);
-        assertThat("Game is not in overtime on 10:9", newGame.getIsOvertime(), is(false));
+        game.__setCustomScore(10, 9);
+        assertThat("Game is not in overtime on 10:9", game.getIsOvertime(), is(false));
 
-        newGame.__setCustomScore(9, 10);
-        assertThat("Game is not in overtime on 9:10", newGame.getIsOvertime(), is(false));
+        game.__setCustomScore(9, 10);
+        assertThat("Game is not in overtime on 9:10", game.getIsOvertime(), is(false));
     }
 
     @Test
     public void shouldCheckIfThereIsOvertimePartThree() {
-        newGame.__setCustomScore(10, 10);
-        assertThat("Game is in overtime on 10:10", newGame.getIsOvertime(), is(true));
+        game.__setCustomScore(10, 10);
+        assertThat("Game is in overtime on 10:10", game.getIsOvertime(), is(true));
 
-        newGame.__setCustomScore(11, 10);
-        assertThat("Game is in overtime on 11:10", newGame.getIsOvertime(), is(true));
+        game.__setCustomScore(11, 10);
+        assertThat("Game is in overtime on 11:10", game.getIsOvertime(), is(true));
 
-        newGame.__setCustomScore(10, 11);
-        assertThat("Game is in overtime on 10:11", newGame.getIsOvertime(), is(true));
+        game.__setCustomScore(10, 11);
+        assertThat("Game is in overtime on 10:11", game.getIsOvertime(), is(true));
     }
 
 
     @Test
     public void shouldCheckIfGameIsOver() {
-        assertThat("Game is not finished", newGame.getIsGameIsOver(), is(false));
+        assertThat("Game is not finished", game.getIfGameIsOver(), is(false));
 
-        newGame.__setCustomScore(2, 6);
-        assertThat("Game is not finished", newGame.getIsGameIsOver(), is(false));
+        game.__setCustomScore(2, 6);
+        assertThat("Game is not finished", game.getIfGameIsOver(), is(false));
 
-        newGame.__setCustomScore(10, 10);
-        assertThat("Game is not finished", newGame.getIsGameIsOver(), is(false));
+        game.__setCustomScore(10, 10);
+        assertThat("Game is not finished", game.getIfGameIsOver(), is(false));
 
-        newGame.__setCustomScore(13, 12);
-        assertThat("Game is not finished", newGame.getIsGameIsOver(), is(false));
+        game.__setCustomScore(13, 12);
+        assertThat("Game is not finished", game.getIfGameIsOver(), is(false));
 
-        newGame.__setCustomScore(11, 9);
-        assertThat("Game is finished", newGame.getIsGameIsOver(), is(true));
+        game.__setCustomScore(11, 9);
+        assertThat("Game is finished", game.getIfGameIsOver(), is(true));
 
-        newGame.__setCustomScore(14, 12);
-        assertThat("Game is finished after overtime", newGame.getIsGameIsOver(), is(true));
+        game.__setCustomScore(14, 12);
+        assertThat("Game is finished after overtime", game.getIfGameIsOver(), is(true));
     }
 
     @Test
     public void shouldSwitchServingPlayerOnEveryPointInOvertime() {
         // Set up to 10 points for player one
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
-        newGame.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
 
         // Set up to 10 points for player two
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerTwo);
-        newGame.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
 
         // Score 10:10
-        assertThat("At this point playerOne is serving again and overtime starts", newGame.getServingPlayer(), is(this.testPlayerOne));
+        assertThat("At this point playerOne is serving again and overtime starts", game.getServingPlayer(), is(this.testPlayerOne));
 
-        newGame.addSetPoint(this.testPlayerOne);
+        game.addSetPoint(this.testPlayerOne);
         // Score 11:10
-        assertThat("In overtime, player two should now serve", newGame.getServingPlayer(), is(this.testPlayerTwo));
+        assertThat("In overtime, player two should now serve", game.getServingPlayer(), is(this.testPlayerTwo));
 
-        newGame.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
         // Score 11:11
-        assertThat("In overtime, player one should now serve again", newGame.getServingPlayer(), is(this.testPlayerOne));
+        assertThat("In overtime, player one should now serve again", game.getServingPlayer(), is(this.testPlayerOne));
 
-        newGame.addSetPoint(this.testPlayerTwo);
+        game.addSetPoint(this.testPlayerTwo);
         // Score 11:12
-        assertThat("In overtime, player two should now serve again", newGame.getServingPlayer(), is(this.testPlayerTwo));
+        assertThat("In overtime, player two should now serve again", game.getServingPlayer(), is(this.testPlayerTwo));
     }
 
     @Test
     public void shouldReturnWinnerOfGame() {
-        assertNull("There is no winner yet", newGame.getWinner());
+        assertNull("There is no winner yet", game.getGameWinner());
 
-        newGame.__setCustomScore(11, 8);
-        assertThat("PlayerOne won the game with 11 points", newGame.getWinner(), is(this.testPlayerOne));
+        game.__setCustomScore(11, 8);
+        assertThat("PlayerOne won the game with 11 points", game.getGameWinner(), is(this.testPlayerOne));
 
-        newGame.__setCustomScore(10, 12);
-        assertThat("PlayerTwo won the game with 12 points in overtime", newGame.getWinner(), is(this.testPlayerTwo));
+        game.__setCustomScore(10, 12);
+        assertThat("PlayerTwo won the game with 12 points in overtime", game.getGameWinner(), is(this.testPlayerTwo));
     }
 
 }

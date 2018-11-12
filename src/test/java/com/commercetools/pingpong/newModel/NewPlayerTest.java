@@ -1,5 +1,6 @@
 package com.commercetools.pingpong.newModel;
 
+import com.commercetools.pingpong.model.Player;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -9,7 +10,7 @@ public class NewPlayerTest {
 
     @Test
     public void shouldCreateNewPlayer() {
-        NewPlayer newPlayer = new NewPlayer("Nicola");
+        Player newPlayer = new Player("Nicola");
         assertThat("test", newPlayer.getName(), is("Nicola"));
     }
 

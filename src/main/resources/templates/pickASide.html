@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Scoreboard</title>
+    <link th:href="@{css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="bg bg-blue">
+</div>
+<div class="bg bg-yellow">
+</div>
+<div class="page">
+    <div class="message-pickASide">
+        <div class="bubble-pickASide">
+            <h2>Play for first serve!</h2>
+        </div>
+    </div>
+    <div class="setscore">
+        <h1 th:text="${leftSetSore} ? leftSetSore : '0'"></h1>
+        <h1>:</h1>
+        <h1 th:text="${rightSetSore} ? rightSetSore : '0'"></h1>
+    </div>
+    <div class="footer-pickASide">
+        <h4 class="hint-text">Press your button if you got the first serve</h4>
+    </div>
+</div>
+<script th:src="@{js/score-fetcher.js}" type="application/javascript"></script>
+</body>
+</html>

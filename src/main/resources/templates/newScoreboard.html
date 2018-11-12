@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Scoreboard</title>
-    <link th:href="@{css/newScoreboard.css}" rel="stylesheet"/>
+    <link th:href="@{css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="bg bg-blue">
@@ -11,27 +11,27 @@
 <div class="bg bg-yellow">
 </div>
 <div class="page">
-    <div class="message">
-        <div class="bubble">
-            <h3 th:text="${bubbleFirstServing} ? 'Play for fist serve!' : (${bubbleCheckOvertime} ? 'Overtime!' : 'Play') "></h3>
+    <div class="message-game">
+        <div class="bubble-game">
+            <h3 th:text="${game.getIsOvertime()} ? 'Overtime!' : 'Play' "></h3>
         </div>
     </div>
     <div class="setscore">
-        <h1 th:text="${leftPlayer.getSetScore()}"></h1>
+        <h1 th:text="${leftSetSore}"></h1>
         <h1>:</h1>
-        <h1 th:text="${rightPlayer.getSetScore()}"></h1>
+        <h1 th:text="${rightSetSore}"></h1>
     </div>
-    <div class="footer">
+    <div class="footer-game">
         <div class="left-serve">
-            <h2 th:text="${leftPlayer.amIServing()} ? 'Your turn!' : '' "></h2>
+            <h2 th:text="${match.findOutWhichPlayerServes() == 'playerOne'} ? 'Your turn!' : '' "></h2>
         </div>
         <div class="matchscore">
-            <h2 th:text="${leftPlayer.getMatchScore()}"></h2>
+            <h2 th:text="${leftMatchScore}"></h2>
             <h2>:</h2>
-            <h2 th:text="${rightPlayer.getMatchScore()}"></h2>
+            <h2 th:text="${rightMatchScore}"></h2>
         </div>
         <div class="right-serve">
-            <h2 th:text="${rightPlayer.amIServing()} ? 'Your turn!' : '' "></h2>
+            <h2 th:text="${match.findOutWhichPlayerServes() == 'playerTwo'} ? 'Your turn!' : '' "></h2>
         </div>
     </div>
 </div>

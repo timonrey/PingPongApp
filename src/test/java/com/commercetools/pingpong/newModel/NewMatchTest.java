@@ -1,5 +1,7 @@
 package com.commercetools.pingpong.newModel;
 
+import com.commercetools.pingpong.model.Match;
+import com.commercetools.pingpong.model.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,16 +11,16 @@ import static org.junit.Assert.assertThat;
 
 public class NewMatchTest {
 
-    private NewPlayer testPlayerOne;
-    private NewPlayer testPlayerTwo;
-    private NewMatch newMatch;
+    private Player testPlayerOne;
+    private Player testPlayerTwo;
+    private Match newMatch;
 
 
     @Before
     public void setup() {
-        testPlayerOne = new NewPlayer("Nicola");
-        testPlayerTwo = new NewPlayer("Timon");
-        newMatch = new NewMatch(this.testPlayerOne, this.testPlayerTwo);
+        testPlayerOne = new Player("Nicola");
+        testPlayerTwo = new Player("Timon");
+        newMatch = new Match(this.testPlayerOne, this.testPlayerTwo);
         newMatch.start(testPlayerOne);
     }
 
@@ -121,6 +123,15 @@ public class NewMatchTest {
         newMatch.addGamePoint(testPlayerTwo);
 
         assertThat("After the second game, player one is back to the left", newMatch.isPlayerOneOnTheLeftSide(), is(true));
+    }
+
+    @Test
+    public void shouldSubtractPointOfGame() {
+        newMatch.createNewGame(true).__setCustomScore(5,3);
+        System.out.println();
+        this.newMatch.subtractGamePoint(this.testPlayerOne);
+        assertThat("Should chage game score of playerOne from 5 to 4", newMatch.getCurrentGame().getScore()[0], is(4));
+
     }
 
 }

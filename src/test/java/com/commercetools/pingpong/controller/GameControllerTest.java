@@ -1,13 +1,6 @@
 package com.commercetools.pingpong.controller;
 
-import com.commercetools.pingpong.model.Game;
-import com.commercetools.pingpong.model.Player;
-
-import com.commercetools.pingpong.service.GameService;
 import org.junit.Test;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import static org.junit.Assert.*;
 
 public class GameControllerTest {
 
