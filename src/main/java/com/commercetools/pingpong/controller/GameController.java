@@ -22,33 +22,57 @@ public class GameController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public String getPlayers(Model model) {
-        model.addAttribute("leftPlayer", gameService.getLeftPlayer());
-        model.addAttribute("rightPlayer", gameService.getRightPlayer());
 
-        model.addAttribute("bubbleFirstServing", gameService.getFirstServingPlayer());
-        model.addAttribute("bubbleCheckOvertime", gameService.getIfItsOvertime());
+        if (!gameService.hasMatchStarted()) {
+            return "pickASide";
 
+        } else if (gameService.getMatch().isMatchOver()) {
+            return "winnerSide";
+        }
+
+        model.addAttribute("game", gameService.getGame());
+
+        model.addAttribute("leftSetSore", gameService.getGame().getScore()[0]);
+        model.addAttribute("rightSetSore", gameService.getGame().getScore()[1]);
+
+        model.addAttribute("match", gameService.getMatch());
+
+        if (gameService.getMatch().isPlayerOneOnTheLeftSide()) {
+            model.addAttribute("leftMatchScore", gameService.getMatch().getMatchPoints()[0]);
+            model.addAttribute("rightMatchScore", gameService.getMatch().getMatchPoints()[1]);
+
+        } else {
+            model.addAttribute("leftMatchScore", gameService.getMatch().getMatchPoints()[1]);
+            model.addAttribute("rightMatchScore", gameService.getMatch().getMatchPoints()[0]);
+        }
         return "newScoreboard";
     }
 
     @RequestMapping(path = "/score", method = RequestMethod.POST)
     @ResponseBody
-    public String updateScorePlusOne(@RequestParam(value = "player", required = false) String player, Model model) {
-        gameService.updateScore(new Message(player, 1));
+    public String updateScorePlusOne(@RequestParam(value = "button", required = false) String playerId, Model model) {
+        gameService.updateScore(new Message(playerId, 1));
         return "Point scored\n";
     }
 
     @RequestMapping(path = "/remove")
     @ResponseBody
-    public String updateScoreDelete(@RequestParam(value = "player", required = false) String player, Model model) {
-        gameService.updateScore(new Message(player, 2));
+    public String updateScoreMinusOne(@RequestParam(value = "button", required = false) String playerId, Model model) {
+        gameService.updateScore(new Message(playerId, 2));
         return "Point removed\n";
     }
 
     @RequestMapping(path = "/reset")
     @ResponseBody
-    public String updateScoreReset(@RequestParam(value = "player", required = false) String player, Model model) {
-        gameService.updateScore(new Message(player, 3));
+    public String updateScoreReset(@RequestParam(value = "button", required = false) String playerId, Model model) {
+        gameService.updateScore(new Message(playerId, 3));
         return "Score reset\n";
+    }
+
+    @RequestMapping(path = "/kill")
+    @ResponseBody
+    public String startNewMatch(@RequestParam(value = "button", required = false) String playerId, Model model) {
+        gameService.killMatch();
+        return "Match killed\n";
     }
 }

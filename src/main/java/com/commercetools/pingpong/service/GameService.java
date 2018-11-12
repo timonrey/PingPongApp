@@ -1,7 +1,8 @@
 package com.commercetools.pingpong.service;
 
 import com.commercetools.pingpong.model.Message;
-import com.commercetools.pingpong.model.Player;
+import com.commercetools.pingpong.model.Game;
+import com.commercetools.pingpong.model.Match;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,15 +10,12 @@ public interface GameService {
 
     void updateScore(Message message);
 
-    Player getLeftPlayer();
+    void killMatch();
 
-    Player getRightPlayer();
+    Game getGame();
 
-    boolean getLeftPlayerServe();
+    Match getMatch();
 
-    boolean getRightPlayerServe();
+    boolean hasMatchStarted();
 
-    boolean getIfItsOvertime();
-
-    boolean getFirstServingPlayer();
 }
